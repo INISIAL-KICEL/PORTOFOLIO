@@ -299,17 +299,36 @@ function Hero({ dark }: { dark: boolean }) {
               Available for Projects
             </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className={`text-5xl md:text-[4.5rem] font-black leading-[0.93] tracking-tight mb-6 ${dark ? 'text-white' : 'text-gray-900'}`}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="mb-8"
             >
-              Hi, I'm<br />
-              <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Muhammad
-              </span>
-              <br />
-              <span className={dark ? 'text-white' : 'text-gray-900'}>Rifki H.</span>
-            </motion.h1>
+              {/* Sapaan Hi, I'm berukuran kecil */}
+              <p className={`text-xl md:text-2xl font-medium mb-2 ${dark ? 'text-gray-400' : 'text-gray-600'}`}>
+                Hi, I'm
+              </p>
+
+              {/* Nama Lengkap */}
+              <h1 className={`font-black leading-[1.05] tracking-tighter`}>
+                {/* Baris 1: Muhammad - Kita block biar punya baris sendiri */}
+                <span className="text-4xl md:text-5xl lg:text-7xl bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent block mb-1">
+                  Muhammad
+                </span>
+
+                {/* Baris 2: Rifki (Putih) & Hidayatulloh (Gradient) */}
+                <div className="text-3xl md:text-4xl lg:text-6xl flex flex-wrap items-baseline gap-x-2">
+                  <span className={dark ? 'text-white' : 'text-gray-900'}>
+                    Rifki
+                  </span>
+                  {/* Gunakan whitespace-nowrap biar 'Hidayatulloh' gak kepotong di tengah */}
+                  <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent whitespace-nowrap">
+                    Hidayatulloh
+                  </span>
+                </div>
+              </h1> 
+            </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.35 }}
