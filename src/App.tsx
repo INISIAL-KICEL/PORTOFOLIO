@@ -372,7 +372,7 @@ function Hero({ dark }: { dark: boolean }) {
               <div className="absolute -inset-5 rounded-3xl bg-gradient-to-br from-violet-500/20 via-blue-500/10 to-cyan-500/20 blur-3xl" />
               <div className={`relative w-72 h-auto md:w-80 rounded-3xl overflow-hidden border shadow-2xl ${dark ? 'border-[#1F1F1F]' : 'border-[#E8E8E8]'}`}>
                 <img
-                  src="/PORTOFOLIO/aset/gambar/foto-saya.png"
+                  src={`${import.meta.env.BASE_URL}aset/gambar/foto-saya.png`}
                   alt="Muhammad Rifki Hidayatulloh"
                   className="w-full object-cover object-top"
                   loading="eager"
