@@ -5,6 +5,7 @@ import {
   Linkedin, ExternalLink, ArrowRight, Video, Shield,
   Code, ChevronDown, Menu, X, Award, Users,
 } from 'lucide-react'
+import fotoGue from './aset/gambar/foto-saya.png';
 
 // ─── Animation Variants ────────────────────────────────────────────────────────
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -372,7 +373,7 @@ function Hero({ dark }: { dark: boolean }) {
               <div className="absolute -inset-5 rounded-3xl bg-gradient-to-br from-violet-500/20 via-blue-500/10 to-cyan-500/20 blur-3xl" />
               <div className={`relative w-72 h-auto md:w-80 rounded-3xl overflow-hidden border shadow-2xl ${dark ? 'border-[#1F1F1F]' : 'border-[#E8E8E8]'}`}>
                 <img
-                  src={`${import.meta.env.BASE_URL}src/aset/gambar/foto-saya.png`}
+                  src={fotoGue}
                   alt="Muhammad Rifki Hidayatulloh"
                   className="w-full object-cover object-top"
                   loading="eager"
