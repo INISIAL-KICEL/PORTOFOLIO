@@ -107,7 +107,7 @@ const organizations = [
 ]
 
 const projects = [
-  { id: '01', category: 'Web · POS System', title: 'NeoKasir', description: 'Aplikasi kasir pintar multi-toko — kelola penjualan, stok, hutang, hingga pengiriman dalam satu dashboard.', tags: ['Node.js', 'MySQL', 'Dashboard'], url: 'https://kasir-rizki-bangunan.web.app', img: shotNeokasir },
+  { id: '01', category: 'Web · POS System', title: 'NeoKasir', description: 'Aplikasi kasir pintar multi-toko — kelola penjualan, stok, hutang, hingga pengiriman dalam satu dashboard.', tags: ['Node.js', 'MySQL', 'Dashboard'], url: 'https://neokasir.realtone.id', img: shotNeokasir },
   { id: '02', category: 'Web · Company Profile', title: 'Mitsubishi Dipo Serang', description: 'Company profile & katalog dealer resmi Mitsubishi Serang–Cilegon, lengkap dengan simulasi & test drive.', tags: ['Company Profile', 'Responsive', 'SEO'], url: 'https://mitsubishiserang.web.app', img: shotMitsubishi },
   { id: '03', category: 'Web · E-Commerce', title: 'Bloomine Florist', description: 'Toko bunga & buket online premium dengan katalog, testimoni, dan pemesanan same-day delivery.', tags: ['E-Commerce', 'React', 'Tailwind'], url: 'https://bloomineflorist.web.app', img: shotBloomine },
   { id: '04', category: 'Web · System', title: 'Sistem Rekrutmen HMPS', description: 'Aplikasi rekrutmen pengurus HMPS Informatika — jadwal wawancara, cek status seleksi, dan panel admin.', tags: ['Web App', 'Auth', 'Dashboard'], url: 'https://hmps-348a3.web.app', img: shotHmps },
