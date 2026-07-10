@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   Moon, Sun, MapPin, Phone, Github, Instagram,
   Linkedin, ArrowRight, ArrowUpRight, Video, Shield,
-  Code, Menu, X, Award, Users, Star,
+  Code, Menu, X, Award, Users,
 } from 'lucide-react'
 import fotoGue from './aset/gambar/foto-saya.png'
 import logoNeokasir from './aset/logos/neokasir.png'
@@ -20,36 +20,36 @@ import logoSdiu from './aset/logos/sdiu.png'
 // ─── Motion ─────────────────────────────────────────────────────────────────
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const reveal: any = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 18 },
   visible: (i = 0) => ({
     opacity: 1, y: 0,
     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: i * 0.05 },
   }),
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const stagger: any = { hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }
+const stagger: any = { hidden: {}, visible: { transition: { staggerChildren: 0.05 } } }
 
 // ─── Data ──────────────────────────────────────────────────────────────────
 const experiences = [
   {
-    role: 'Founder & Owner', company: 'HISTORIS KITA', type: 'PART-TIME', period: '2023 — NOW',
-    desc: 'Rumah produksi visual fokus sinematografi pernikahan. Mengelola pipeline penuh dari pra-produksi hingga color grading (Adobe Premiere Pro).',
-    icon: <Video size={18} />, tags: ['Premiere Pro', 'Sinematografi', 'Color Grade'],
+    role: 'Founder & Owner', company: 'Historis Kita', type: 'Part-time', period: '2023 — Sekarang',
+    desc: 'Rumah produksi visual fokus sinematografi pernikahan. Mengelola pipeline penuh dari pra-produksi hingga color grading.',
+    icon: <Video size={16} />, tags: ['Premiere Pro', 'Sinematografi', 'Color Grade'],
   },
   {
-    role: 'Founder & IT Consultant', company: 'SARVANET.ID', type: 'FOUNDER', period: '2025 — NOW',
-    desc: 'Konsultasi internet & strategi penerapan jaringan. Merancang topologi berbasis Cisco dan analisis teknis untuk klien institusi/kampus.',
-    icon: <Shield size={18} />, tags: ['Cisco', 'Network Deployment', 'IT Consulting'],
+    role: 'Founder & IT Consultant', company: 'SarvaNet.id', type: 'Founder', period: '2025 — Sekarang',
+    desc: 'Konsultasi internet & strategi penerapan jaringan. Merancang topologi berbasis Cisco untuk klien institusi/kampus.',
+    icon: <Shield size={16} />, tags: ['Cisco', 'Network Deployment', 'IT Consulting'],
   },
   {
-    role: 'AI Video Editor', company: 'DALANG.IO', type: 'CONTRACT', period: '2025',
-    desc: 'Pengeditan video berbasis AI + inisiatif digital marketing untuk konten skala besar dengan efisiensi tinggi.',
-    icon: <Code size={18} />, tags: ['AI Tools', 'Premiere Pro', 'Digital Marketing'],
+    role: 'AI Video Editor', company: 'Dalang.io', type: 'Contract', period: '2025',
+    desc: 'Pengeditan video berbasis AI dan inisiatif digital marketing untuk konten skala besar dengan efisiensi tinggi.',
+    icon: <Code size={16} />, tags: ['AI Tools', 'Premiere Pro', 'Digital Marketing'],
   },
   {
-    role: 'Asisten Praktikum Fisika', company: 'FST · UIN SMH BANTEN', type: 'KAMPUS', period: '2025',
+    role: 'Asisten Praktikum Fisika', company: 'FST · UIN SMH Banten', type: 'Kampus', period: '2025',
     desc: 'Mendampingi praktikum Fisika Dasar mahasiswa FST — membimbing eksperimen dan analisis laboratorium.',
-    icon: <Users size={18} />, tags: ['Asistensi', 'Lab', 'Fisika'],
+    icon: <Users size={16} />, tags: ['Asistensi', 'Lab', 'Fisika'],
   },
 ]
 
@@ -93,20 +93,20 @@ const awards = [
 ]
 
 const organizations = [
-  { role: 'Bidang Ekonomi, UMKM & Startup', org: 'HIPMI PT DPD Banten', period: '2026 — NOW', current: true },
-  { role: 'Ketua Departemen Eksternal', org: 'HMPS Informatika · UIN SMH Banten', period: '2026 — NOW', current: true },
+  { role: 'Bidang Ekonomi, UMKM & Startup', org: 'HIPMI PT DPD Banten', period: '2026 — Sekarang', current: true },
+  { role: 'Ketua Departemen Eksternal', org: 'HMPS Informatika · UIN SMH Banten', period: '2026 — Sekarang', current: true },
   { role: 'Ketua Pelaksana', org: 'Mapansa Expo Campus 2026 · IKA-MAN', period: '2026', current: false },
-  { role: 'Koordinator Multimedia', org: 'IREMA Masjid Agung Ar-Rahman', period: '2024 — NOW', current: true },
+  { role: 'Koordinator Multimedia', org: 'IREMA Masjid Agung Ar-Rahman', period: '2024 — Sekarang', current: true },
   { role: 'Anggota Saka Widya Budaya', org: 'Dinas Pendidikan Kab. Pandeglang', period: '2023 — 2025', current: false },
   { role: 'Ketua Dewan Ambalan Putra', org: 'KH Agus Salim · MAN 1 Pandeglang', period: '2022 — 2023', current: false },
   { role: 'Bendahara 2', org: 'Dewan Penggalang · MTsN 1 Pandeglang', period: '2019 — 2020', current: false },
 ]
 
 const projects = [
-  { id: '01', category: 'WEDDING FILM', title: 'Cinematic Wedding Stories', description: 'Produksi video pernikahan full-service, dari pre-wedding hingga same-day edit dengan pendekatan sinematik & editorial.', tags: ['DJI Ronin', 'Sony FX3', 'Color Grade'], icon: <Video size={20} /> },
-  { id: '02', category: 'DIGITAL SECURITY', title: 'CTF & Penetration Testing', description: 'Kompetisi Capture the Flag & web app pentesting. Fokus OWASP Top 10 dan metodologi ethical hacking.', tags: ['Kali Linux', 'Burp Suite', 'OWASP'], icon: <Shield size={20} /> },
-  { id: '03', category: 'NETWORKING', title: 'Network Lab & Simulation', description: 'Simulasi jaringan dengan PNETLab. Konfigurasi Cisco & Mikrotik untuk infrastruktur enterprise dari nol.', tags: ['PNETLab', 'Cisco', 'Mikrotik'], icon: <Code size={20} /> },
-  { id: '04', category: 'DEVELOPMENT', title: 'Full-Stack Web Projects', description: 'Aplikasi web modern — dari sistem manajemen akademik sampai dashboard interaktif dengan use case nyata.', tags: ['React', 'Laravel', 'TypeScript'], icon: <Code size={20} /> },
+  { id: '01', category: 'Wedding Film', title: 'Cinematic Wedding Stories', description: 'Produksi video pernikahan full-service, dari pre-wedding hingga same-day edit dengan pendekatan sinematik & editorial.', tags: ['DJI Ronin', 'Sony FX3', 'Color Grade'], icon: <Video size={18} /> },
+  { id: '02', category: 'Digital Security', title: 'CTF & Penetration Testing', description: 'Kompetisi Capture the Flag & web app pentesting. Fokus OWASP Top 10 dan metodologi ethical hacking.', tags: ['Kali Linux', 'Burp Suite', 'OWASP'], icon: <Shield size={18} /> },
+  { id: '03', category: 'Networking', title: 'Network Lab & Simulation', description: 'Simulasi jaringan dengan PNETLab. Konfigurasi Cisco & Mikrotik untuk infrastruktur enterprise dari nol.', tags: ['PNETLab', 'Cisco', 'Mikrotik'], icon: <Code size={18} /> },
+  { id: '04', category: 'Development', title: 'Full-Stack Web Projects', description: 'Aplikasi web modern — dari sistem manajemen akademik sampai dashboard interaktif dengan use case nyata.', tags: ['React', 'Laravel', 'TypeScript'], icon: <Code size={18} /> },
 ]
 
 const clients = [
@@ -123,38 +123,32 @@ const clients = [
 ]
 
 const SOCIALS = [
-  { icon: <Github size={17} />, href: 'https://github.com/INISIAL-KICEL', label: 'GitHub' },
-  { icon: <Instagram size={17} />, href: 'https://www.instagram.com/inisial_kicel/', label: 'Instagram' },
-  { icon: <Linkedin size={17} />, href: 'https://www.linkedin.com/in/muhammad-rifki-hidayatulloh-7250782bb/', label: 'LinkedIn' },
+  { icon: <Github size={16} />, href: 'https://github.com/INISIAL-KICEL', label: 'GitHub' },
+  { icon: <Instagram size={16} />, href: 'https://www.instagram.com/inisial_kicel/', label: 'Instagram' },
+  { icon: <Linkedin size={16} />, href: 'https://www.linkedin.com/in/muhammad-rifki-hidayatulloh-7250782bb/', label: 'LinkedIn' },
 ]
 
-// ─── Helpers ────────────────────────────────────────────────────────────────
-function Marquee({ items, dark, invert = false, reverse = false }: { items: string[]; dark: boolean; invert?: boolean; reverse?: boolean }) {
-  const bg = invert ? 'bg-lime text-ink' : dark ? 'bg-[#0A0A0A] text-white' : 'bg-ink text-white'
-  return (
-    <div className={`overflow-hidden border-y-2 ${invert ? 'border-ink' : 'border-white/20'} ${bg} py-3 md:py-4`}>
-      <div className={`marquee-track ${reverse ? 'animate-marquee-rev' : 'animate-marquee'}`}>
-        {[0, 1].map((k) => (
-          <div key={k} className="flex items-center shrink-0" aria-hidden={k === 1}>
-            {items.map((it, i) => (
-              <span key={i} className="flex items-center shrink-0">
-                <span className="font-display uppercase text-2xl md:text-4xl px-5 md:px-8 tracking-tight">{it}</span>
-                <Star size={18} className={invert ? 'text-ink' : 'text-lime'} fill="currentColor" />
-              </span>
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
+// ─── Theme helper ─────────────────────────────────────────────────────────────
+const T = (dark: boolean) => ({
+  bg: dark ? 'bg-[#0B0B0B]' : 'bg-[#FAF9F6]',
+  text: dark ? 'text-neutral-100' : 'text-neutral-900',
+  muted: dark ? 'text-neutral-400' : 'text-neutral-500',
+  faint: dark ? 'text-neutral-600' : 'text-neutral-400',
+  border: dark ? 'border-white/10' : 'border-black/10',
+  hover: dark ? 'hover:bg-white/[0.03]' : 'hover:bg-black/[0.02]',
+})
 
-function SectionTag({ n, label, dark }: { n: string; label: string; dark: boolean }) {
+function SectionHead({ n, label, title, dark }: { n: string; label: string; title: string; dark: boolean }) {
+  const t = T(dark)
   return (
-    <div className="flex items-center gap-3 mb-6">
-      <span className="font-mono text-xs font-bold text-lime">({n})</span>
-      <span className={`font-mono text-xs font-bold tracking-[0.2em] uppercase ${dark ? 'text-white/50' : 'text-ink/50'}`}>{label}</span>
-      <span className={`flex-1 h-px ${dark ? 'bg-white/15' : 'bg-ink/15'}`} />
+    <div className="mb-12 md:mb-16">
+      <motion.div variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className={`flex items-center gap-3 mb-5 font-mono text-xs ${t.muted}`}>
+        <span className="text-lime">{n}</span>
+        <span className="tracking-[0.15em] uppercase">{label}</span>
+      </motion.div>
+      <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} className={`text-3xl md:text-[2.7rem] font-semibold tracking-tight ${t.text}`}>
+        {title}
+      </motion.h2>
     </div>
   )
 }
@@ -163,49 +157,39 @@ function SectionTag({ n, label, dark }: { n: string; label: string; dark: boolea
 function Navbar({ dark, toggleDark }: { dark: boolean; toggleDark: () => void }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const t = T(dark)
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
   const nav = [
-    { label: 'ABOUT', href: '#about' }, { label: 'WORK', href: '#experience' },
-    { label: 'CERTS', href: '#certifications' }, { label: 'ORG', href: '#organizations' },
-    { label: 'PROJECTS', href: '#projects' }, { label: 'CLIENTS', href: '#clients' },
+    { label: 'About', href: '#about' }, { label: 'Work', href: '#experience' },
+    { label: 'Certs', href: '#certifications' }, { label: 'Org', href: '#organizations' },
+    { label: 'Projects', href: '#projects' }, { label: 'Clients', href: '#clients' },
   ]
-  const line = dark ? 'border-white/15' : 'border-ink/15'
-
   return (
-    <header className={`fixed top-0 inset-x-0 z-50 border-b-2 transition-colors duration-300 ${scrolled ? (dark ? 'bg-[#0A0A0A]/95 backdrop-blur border-white/15' : 'bg-paper/95 backdrop-blur border-ink/20') : `bg-transparent ${line}`}`}>
-      <div className="max-w-7xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
-        <a href="#home" className={`font-display text-xl tracking-tight ${dark ? 'text-white' : 'text-ink'}`}>
-          MRH<span className="text-lime">.</span>
-        </a>
-        <nav className="hidden md:flex items-center gap-6">
+    <header className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${scrolled ? `${dark ? 'bg-[#0B0B0B]/80' : 'bg-[#FAF9F6]/80'} backdrop-blur border-b ${t.border}` : 'bg-transparent'}`}>
+      <div className="max-w-5xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
+        <a href="#home" className={`text-sm font-semibold tracking-tight ${t.text}`}>MRH<span className="text-lime">.</span></a>
+        <nav className="hidden md:flex items-center gap-7">
           {nav.map((it) => (
-            <a key={it.label} href={it.href} className={`font-mono text-xs font-medium tracking-wider transition-colors hover:text-lime ${dark ? 'text-white/60' : 'text-ink/60'}`}>{it.label}</a>
+            <a key={it.label} href={it.href} className={`text-sm transition-colors hover:text-lime ${t.muted}`}>{it.label}</a>
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <button onClick={toggleDark} aria-label="Toggle theme" className={`w-9 h-9 border-2 flex items-center justify-center transition-colors hover:bg-lime hover:text-ink hover:border-lime ${dark ? 'border-white/25 text-white' : 'border-ink text-ink'}`}>
+          <button onClick={toggleDark} aria-label="Toggle theme" className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${dark ? 'text-neutral-300 hover:bg-white/10' : 'text-neutral-600 hover:bg-black/5'}`}>
             {dark ? <Sun size={15} /> : <Moon size={15} />}
           </button>
-          <a href="#contact" className="hidden md:flex items-center gap-2 px-4 h-9 bg-lime text-ink font-mono text-xs font-bold uppercase border-2 border-lime hover:bg-transparent hover:text-lime transition-colors">
-            Inquiry <ArrowUpRight size={14} />
-          </a>
-          <button onClick={() => setMenuOpen(!menuOpen)} className={`md:hidden w-9 h-9 border-2 flex items-center justify-center ${dark ? 'border-white/25 text-white' : 'border-ink text-ink'}`}>
-            {menuOpen ? <X size={16} /> : <Menu size={16} />}
-          </button>
+          <a href="#contact" className={`hidden md:inline-flex items-center gap-1.5 px-4 h-9 rounded-full text-sm font-medium transition-colors ${dark ? 'bg-white text-black hover:bg-lime' : 'bg-black text-white hover:bg-lime hover:text-black'}`}>Kontak</a>
+          <button onClick={() => setMenuOpen(!menuOpen)} className={`md:hidden w-9 h-9 flex items-center justify-center ${t.text}`}>{menuOpen ? <X size={18} /> : <Menu size={18} />}</button>
         </div>
       </div>
       <AnimatePresence>
         {menuOpen && (
-          <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className={`md:hidden overflow-hidden border-t-2 ${dark ? 'bg-[#0A0A0A] border-white/15' : 'bg-paper border-ink/20'}`}>
+          <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className={`md:hidden overflow-hidden border-t ${t.border} ${dark ? 'bg-[#0B0B0B]' : 'bg-[#FAF9F6]'}`}>
             <div className="px-5 py-4 flex flex-col gap-3">
-              {nav.map((it) => (
-                <a key={it.label} href={it.href} onClick={() => setMenuOpen(false)} className={`font-mono text-sm ${dark ? 'text-white/80' : 'text-ink/80'}`}>{it.label}</a>
-              ))}
+              {nav.map((it) => <a key={it.label} href={it.href} onClick={() => setMenuOpen(false)} className={`text-sm ${t.muted}`}>{it.label}</a>)}
             </div>
           </motion.div>
         )}
@@ -216,114 +200,90 @@ function Navbar({ dark, toggleDark }: { dark: boolean; toggleDark: () => void })
 
 // ─── Hero ───────────────────────────────────────────────────────────────────
 function Hero({ dark }: { dark: boolean }) {
+  const t = T(dark)
   return (
-    <section id="home" className={`relative pt-24 md:pt-28 overflow-hidden ${dark ? 'bg-[#0A0A0A]' : 'bg-paper'}`}>
-      <div className="max-w-7xl mx-auto px-5 md:px-8 pb-8">
-        {/* top meta row */}
-        <div className={`flex items-center justify-between font-mono text-[10px] md:text-xs uppercase tracking-widest mb-8 ${dark ? 'text-white/40' : 'text-ink/50'}`}>
-          <span>Pandeglang · Banten · ID</span>
-          <span className="hidden sm:flex items-center gap-2"><span className="w-2 h-2 bg-lime inline-block animate-pulse" /> Open for work — 2026</span>
-        </div>
-
-        <div className="grid lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-6 items-end">
-          {/* Left: giant name */}
+    <section id="home" className={`relative ${t.bg}`}>
+      <div className="max-w-5xl mx-auto px-5 md:px-8 pt-36 md:pt-44 pb-20 md:pb-28">
+        <div className="grid md:grid-cols-[1fr_auto] gap-12 md:gap-16 items-center">
           <div>
-            <motion.p initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className={`font-mono text-sm mb-3 ${dark ? 'text-white/60' : 'text-ink/60'}`}>
-              // Videographer · Cybersecurity · Web Developer
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className={`inline-flex items-center gap-2 text-xs font-mono mb-8 ${t.muted}`}>
+              <span className="w-1.5 h-1.5 rounded-full bg-lime inline-block" /> Available for work — 2026
+            </motion.div>
+            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }} className={`text-[clamp(2.4rem,7vw,4.6rem)] font-semibold leading-[1.02] tracking-tight ${t.text}`}>
+              Muhammad Rifki<br /><span className={t.faint}>Hidayatulloh</span>
+            </motion.h1>
+            <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} className={`mt-6 text-base md:text-lg leading-relaxed max-w-md ${t.muted}`}>
+              Videographer, praktisi cybersecurity & jaringan, dan web developer. Mahasiswa Informatika UIN di Pandeglang, Banten.
             </motion.p>
-            <h1 className={`font-display uppercase leading-[0.82] tracking-tight ${dark ? 'text-white' : 'text-ink'}`}>
-              <motion.span initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }} className="block text-[clamp(2.9rem,11vw,9rem)]">Muhammad</motion.span>
-              <motion.span initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.13 }} className="block text-[clamp(2.9rem,11vw,9rem)]">
-                <span className="bg-lime text-ink px-2 md:px-3 box-decoration-clone">Rifki</span>
-              </motion.span>
-              <motion.span initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.21 }} className="block text-[clamp(2.4rem,9vw,7.5rem)] text-stroke">Hidayatulloh</motion.span>
-            </h1>
-
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.4 }} className="flex flex-wrap items-center gap-3 mt-8">
-              <a href="#projects" className="group flex items-center gap-2 px-6 h-12 bg-lime text-ink font-mono text-sm font-bold uppercase border-2 border-lime shadow-[6px_6px_0_0_currentColor] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all">
-                Lihat Karya <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }} className="mt-9 flex flex-wrap items-center gap-3">
+              <a href="#projects" className={`group inline-flex items-center gap-2 px-5 h-11 rounded-full text-sm font-medium transition-colors ${dark ? 'bg-white text-black hover:bg-lime' : 'bg-black text-white hover:bg-lime hover:text-black'}`}>
+                Lihat Karya <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
               </a>
-              <a href="#contact" className={`flex items-center gap-2 px-6 h-12 font-mono text-sm font-bold uppercase border-2 transition-colors hover:bg-lime hover:text-ink hover:border-lime ${dark ? 'border-white/30 text-white' : 'border-ink text-ink'}`}>
-                Hubungi Saya
-              </a>
-              <div className="flex items-center gap-2 ml-1">
+              <a href="#contact" className={`inline-flex items-center px-5 h-11 rounded-full text-sm font-medium border transition-colors ${t.border} ${t.text} hover:border-lime`}>Hubungi Saya</a>
+              <div className="flex items-center gap-1 ml-1">
                 {SOCIALS.map((s) => (
-                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className={`w-12 h-12 border-2 flex items-center justify-center transition-colors hover:bg-lime hover:text-ink hover:border-lime ${dark ? 'border-white/25 text-white' : 'border-ink text-ink'}`}>{s.icon}</a>
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${t.muted} hover:text-lime`}>{s.icon}</a>
                 ))}
               </div>
             </motion.div>
           </div>
-
-          {/* Right: photo framed */}
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.3 }} className="relative w-full max-w-[320px] justify-self-center lg:justify-self-end">
-            <div className={`relative border-2 ${dark ? 'border-white' : 'border-ink'} shadow-brutal-lime-lg`}>
-              <img src={fotoGue} alt="Muhammad Rifki Hidayatulloh" className="w-full object-cover object-top grayscale contrast-[1.05]" loading="eager" />
-              <div className="absolute -top-3 -right-3 rotate-6 bg-lime text-ink font-mono text-[10px] font-bold uppercase px-3 py-1 border-2 border-ink">Est. 2006</div>
-            </div>
-            <div className={`mt-3 flex items-center justify-between font-mono text-[10px] uppercase ${dark ? 'text-white/40' : 'text-ink/50'}`}>
-              <span>[ MRH ]</span><span>IPK 3.75 · UIN</span>
+          <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.2 }} className="justify-self-center md:justify-self-end">
+            <div className={`w-44 md:w-52 rounded-2xl overflow-hidden border ${t.border}`}>
+              <img src={fotoGue} alt="Muhammad Rifki Hidayatulloh" className="w-full object-cover object-top grayscale" loading="eager" />
             </div>
           </motion.div>
         </div>
-      </div>
 
-      <Marquee dark={dark} invert items={['Wedding Film', 'Cybersecurity', 'Network Engineering', 'Web Development', 'Photography', 'CTF']} />
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.4 }} className={`mt-16 pt-8 border-t ${t.border} flex flex-wrap gap-x-8 gap-y-2 font-mono text-xs ${t.faint}`}>
+          <span>Wedding Film</span><span>Cybersecurity</span><span>Network Engineering</span><span>Web Development</span><span>Photography</span>
+        </motion.div>
+      </div>
     </section>
   )
 }
 
 // ─── About ──────────────────────────────────────────────────────────────────
 function About({ dark }: { dark: boolean }) {
+  const t = T(dark)
   const skills = [
-    { label: 'Videography & Color', level: 90 },
-    { label: 'Editing / Premiere Pro', level: 87 },
-    { label: 'Networking (Cisco/MTk)', level: 74 },
-    { label: 'Web Development', level: 74 },
+    { label: 'Videography & Color', level: 90 }, { label: 'Editing / Premiere Pro', level: 87 },
+    { label: 'Networking (Cisco/Mikrotik)', level: 74 }, { label: 'Web Development', level: 74 },
     { label: 'Cybersecurity / CTF', level: 68 },
   ]
-  const stats = [
-    { v: '30+', l: 'Pernikahan' }, { v: '18+', l: 'Sertifikasi' },
-    { v: '7+', l: 'Organisasi' }, { v: '04', l: 'Penghargaan' },
-  ]
+  const stats = [{ v: '30+', l: 'Pernikahan' }, { v: '18+', l: 'Sertifikasi' }, { v: '7+', l: 'Organisasi' }, { v: '04', l: 'Penghargaan' }]
   return (
-    <section id="about" className={`py-20 md:py-28 ${dark ? 'bg-[#0A0A0A] text-white' : 'bg-paper text-ink'}`}>
-      <div className="max-w-7xl mx-auto px-5 md:px-8">
-        <SectionTag n="01" label="About" dark={dark} />
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
+    <section id="about" className={`py-24 md:py-32 ${t.bg}`}>
+      <div className="max-w-5xl mx-auto px-5 md:px-8">
+        <SectionHead n="01" label="About" title="Tentang saya" dark={dark} />
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16">
           <div>
-            <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(1.9rem,5vw,3.4rem)] leading-[0.95] tracking-tight mb-8">
-              Teknologi ketemu <span className="text-lime">visual</span> & keamanan digital.
-            </motion.h2>
-            <motion.p variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} className={`text-base leading-relaxed mb-4 ${dark ? 'text-white/70' : 'text-ink/70'}`}>
-              Saya Muhammad Rifki Hidayatulloh — mahasiswa Informatika UIN di Pandeglang, Banten. Di satu sisi merekam momen pernikahan dengan sentuhan sinematik, di sisi lain mendalami cybersecurity & jaringan komputer.
+            <motion.p variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className={`text-base leading-relaxed mb-4 ${t.muted}`}>
+              Saya Muhammad Rifki Hidayatulloh — mahasiswa Informatika UIN di Pandeglang. Di satu sisi merekam momen pernikahan dengan sentuhan sinematik, di sisi lain mendalami cybersecurity & jaringan komputer.
             </motion.p>
-            <motion.p variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2} className={`text-base leading-relaxed ${dark ? 'text-white/70' : 'text-ink/70'}`}>
-              Perpaduan ini bikin saya mendekati masalah dari banyak sudut: kreativitas filmmaker, presisi developer, dan mindset analitis security researcher.
+            <motion.p variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} className={`text-base leading-relaxed ${t.muted}`}>
+              Perpaduan ini membuat saya mendekati masalah dari banyak sudut: kreativitas filmmaker, presisi developer, dan mindset analitis security researcher.
             </motion.p>
-            <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 sm:grid-cols-4 gap-0 mt-10 border-2 border-current">
-              {stats.map((s, i) => (
-                <motion.div key={s.l} variants={reveal} className={`p-4 md:p-5 border-current ${i % 2 === 0 ? 'border-r-2' : ''} ${i < 2 ? 'border-b-2 sm:border-b-0' : ''} ${i === 2 ? 'sm:border-r-2' : ''} ${i > 0 && i !== 2 ? 'sm:border-l-0' : ''}`}>
-                  <div className="font-display text-3xl md:text-4xl">{s.v}</div>
-                  <div className={`font-mono text-[10px] uppercase tracking-wider mt-1 ${dark ? 'text-white/50' : 'text-ink/50'}`}>{s.l}</div>
+            <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-4 gap-4 mt-10">
+              {stats.map((s) => (
+                <motion.div key={s.l} variants={reveal}>
+                  <div className={`text-2xl md:text-3xl font-semibold ${t.text}`}>{s.v}</div>
+                  <div className={`text-[11px] mt-1 ${t.faint}`}>{s.l}</div>
                 </motion.div>
               ))}
             </motion.div>
           </div>
-          <div>
-            <p className={`font-mono text-xs uppercase tracking-[0.2em] mb-6 ${dark ? 'text-white/50' : 'text-ink/50'}`}>// Core Skills</p>
-            <div className="space-y-5">
-              {skills.map((sk, i) => (
-                <motion.div key={sk.label} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i}>
-                  <div className="flex justify-between items-end mb-2">
-                    <span className="font-mono text-sm font-medium">{sk.label}</span>
-                    <span className="font-display text-lg">{sk.level}<span className="text-lime">%</span></span>
-                  </div>
-                  <div className={`h-3 border-2 border-current`}>
-                    <motion.div className="h-full bg-lime" initial={{ width: 0 }} whileInView={{ width: `${sk.level}%` }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }} />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+          <div className="space-y-5">
+            {skills.map((sk, i) => (
+              <motion.div key={sk.label} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i}>
+                <div className="flex justify-between mb-2">
+                  <span className={`text-sm ${t.text}`}>{sk.label}</span>
+                  <span className={`text-sm ${t.faint}`}>{sk.level}%</span>
+                </div>
+                <div className={`h-1 rounded-full ${dark ? 'bg-white/10' : 'bg-black/10'}`}>
+                  <motion.div className="h-1 rounded-full bg-lime" initial={{ width: 0 }} whileInView={{ width: `${sk.level}%` }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }} />
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
@@ -333,28 +293,27 @@ function About({ dark }: { dark: boolean }) {
 
 // ─── Experience ─────────────────────────────────────────────────────────────
 function WorkExperience({ dark }: { dark: boolean }) {
+  const t = T(dark)
   return (
-    <section id="experience" className={`py-20 md:py-28 border-t-2 ${dark ? 'bg-[#0A0A0A] text-white border-white/15' : 'bg-paper text-ink border-ink/15'}`}>
-      <div className="max-w-7xl mx-auto px-5 md:px-8">
-        <SectionTag n="02" label="Experience" dark={dark} />
-        <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.9] tracking-tight mb-12">
-          Pengalaman<span className="text-lime">.</span>
-        </motion.h2>
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-2 gap-5">
-          {experiences.map((exp) => (
-            <motion.div key={exp.company} variants={reveal} className={`group border-2 border-current p-6 transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-lime`}>
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-11 h-11 border-2 border-current flex items-center justify-center group-hover:bg-lime group-hover:text-ink group-hover:border-lime transition-colors">{exp.icon}</div>
-                <span className={`font-mono text-[10px] font-bold uppercase px-2 py-1 border ${dark ? 'border-white/30 text-white/60' : 'border-ink/30 text-ink/60'}`}>{exp.type}</span>
+    <section id="experience" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
+      <div className="max-w-5xl mx-auto px-5 md:px-8">
+        <SectionHead n="02" label="Experience" title="Pengalaman" dark={dark} />
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          {experiences.map((exp, i) => (
+            <motion.div key={exp.company} variants={reveal} className={`grid md:grid-cols-[1fr_2fr] gap-2 md:gap-10 py-7 ${i > 0 ? `border-t ${t.border}` : ''}`}>
+              <div>
+                <div className={`flex items-center gap-2 ${t.text}`}>
+                  <span className={t.faint}>{exp.icon}</span>
+                  <h3 className="text-lg font-semibold tracking-tight">{exp.role}</h3>
+                </div>
+                <p className={`text-sm mt-1 ${t.muted}`}>{exp.company}</p>
+                <p className={`font-mono text-xs mt-1 ${t.faint}`}>{exp.period} · {exp.type}</p>
               </div>
-              <div className={`font-mono text-xs mb-1 ${dark ? 'text-white/50' : 'text-ink/50'}`}>{exp.period}</div>
-              <h3 className="font-display uppercase text-xl tracking-tight leading-tight">{exp.role}</h3>
-              <p className="font-mono text-sm text-lime mb-3">{exp.company}</p>
-              <p className={`text-sm leading-relaxed mb-4 ${dark ? 'text-white/65' : 'text-ink/65'}`}>{exp.desc}</p>
-              <div className="flex flex-wrap gap-2">
-                {exp.tags.map((t) => (
-                  <span key={t} className={`font-mono text-[10px] uppercase px-2 py-1 border ${dark ? 'border-white/20 text-white/60' : 'border-ink/20 text-ink/60'}`}>{t}</span>
-                ))}
+              <div>
+                <p className={`text-sm leading-relaxed mb-3 ${t.muted}`}>{exp.desc}</p>
+                <div className="flex flex-wrap gap-2">
+                  {exp.tags.map((tag) => <span key={tag} className={`text-xs px-2.5 py-1 rounded-full ${dark ? 'bg-white/5 text-neutral-400' : 'bg-black/5 text-neutral-500'}`}>{tag}</span>)}
+                </div>
               </div>
             </motion.div>
           ))}
@@ -366,50 +325,43 @@ function WorkExperience({ dark }: { dark: boolean }) {
 
 // ─── Certifications + Awards ─────────────────────────────────────────────────
 function Certifications({ dark }: { dark: boolean }) {
+  const t = T(dark)
   return (
-    <section id="certifications" className={`py-20 md:py-28 border-t-2 ${dark ? 'bg-[#0A0A0A] text-white border-white/15' : 'bg-paper text-ink border-ink/15'}`}>
-      <div className="max-w-7xl mx-auto px-5 md:px-8">
-        <SectionTag n="03" label="Licenses & Awards" dark={dark} />
-        <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.9] tracking-tight mb-12">
-          Sertifikasi & Penghargaan<span className="text-lime">.</span>
-        </motion.h2>
+    <section id="certifications" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
+      <div className="max-w-5xl mx-auto px-5 md:px-8">
+        <SectionHead n="03" label="Licenses & Awards" title="Sertifikasi & penghargaan" dark={dark} />
 
+        {/* Awards */}
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid sm:grid-cols-2 gap-x-10 gap-y-4 mb-14">
+          {awards.map((a, i) => (
+            <motion.div key={i} variants={reveal} className={`flex items-start gap-3 pb-4 border-b ${t.border}`}>
+              <Award size={15} className="text-lime shrink-0 mt-1" />
+              <div className="flex-1">
+                <div className="flex items-baseline justify-between gap-2">
+                  <p className={`text-sm font-medium ${t.text}`}>{a.title}</p>
+                  <span className={`font-mono text-xs ${t.faint}`}>{a.date}</span>
+                </div>
+                <p className={`text-xs mt-0.5 ${t.muted}`}>{a.issuer}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Certs */}
         <div className="space-y-10">
           {certifications.map((group) => (
-            <div key={group.year} className="grid md:grid-cols-[100px_1fr] gap-4 md:gap-8">
-              <div className="font-display text-4xl md:text-5xl text-lime leading-none">{group.year}</div>
-              <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid sm:grid-cols-2 gap-3">
+            <div key={group.year} className="grid md:grid-cols-[80px_1fr] gap-3 md:gap-8">
+              <div className={`font-mono text-sm ${t.faint}`}>{group.year}</div>
+              <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid sm:grid-cols-2 gap-x-10 gap-y-0">
                 {group.items.map((c, i) => (
-                  <motion.div key={i} variants={reveal} className={`group flex items-start gap-3 border-2 border-current p-4 transition-all hover:-translate-y-1 hover:shadow-brutal-sm`}>
-                    <Shield size={15} className="text-lime shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold leading-snug">{c.title}</p>
-                      <p className={`font-mono text-[11px] mt-1 ${dark ? 'text-white/45' : 'text-ink/45'}`}>{c.issuer}</p>
-                    </div>
+                  <motion.div key={i} variants={reveal} className={`py-3 border-b ${t.border}`}>
+                    <p className={`text-sm ${t.text}`}>{c.title}</p>
+                    <p className={`text-xs mt-0.5 ${t.faint}`}>{c.issuer}</p>
                   </motion.div>
                 ))}
               </motion.div>
             </div>
           ))}
-
-          {/* Awards */}
-          <div className="grid md:grid-cols-[100px_1fr] gap-4 md:gap-8 pt-4">
-            <div className="font-mono text-xs font-bold uppercase tracking-widest text-lime pt-2">★ Prestasi</div>
-            <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid sm:grid-cols-2 gap-3">
-              {awards.map((a, i) => (
-                <motion.div key={i} variants={reveal} className="group flex items-start gap-3 border-2 border-lime bg-lime/10 p-4 transition-all hover:-translate-y-1 hover:shadow-brutal-lime">
-                  <Award size={16} className="text-lime shrink-0 mt-0.5" />
-                  <div className="flex-1">
-                    <div className="flex items-baseline justify-between gap-2">
-                      <p className="text-sm font-bold leading-snug">{a.title}</p>
-                      <span className="font-display text-sm text-lime">{a.date}</span>
-                    </div>
-                    <p className={`font-mono text-[11px] mt-1 ${dark ? 'text-white/50' : 'text-ink/50'}`}>{a.issuer}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
         </div>
       </div>
     </section>
@@ -418,22 +370,20 @@ function Certifications({ dark }: { dark: boolean }) {
 
 // ─── Organizations ──────────────────────────────────────────────────────────
 function Organizations({ dark }: { dark: boolean }) {
+  const t = T(dark)
   return (
-    <section id="organizations" className={`py-20 md:py-28 border-t-2 ${dark ? 'bg-[#0A0A0A] text-white border-white/15' : 'bg-paper text-ink border-ink/15'}`}>
-      <div className="max-w-7xl mx-auto px-5 md:px-8">
-        <SectionTag n="04" label="Leadership" dark={dark} />
-        <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.9] tracking-tight mb-12">
-          Organisasi<span className="text-lime">.</span>
-        </motion.h2>
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="border-t-2 border-current">
+    <section id="organizations" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
+      <div className="max-w-5xl mx-auto px-5 md:px-8">
+        <SectionHead n="04" label="Leadership" title="Organisasi" dark={dark} />
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           {organizations.map((o, i) => (
-            <motion.div key={i} variants={reveal} className={`group grid grid-cols-1 md:grid-cols-[140px_1fr_auto] md:items-center gap-1 md:gap-6 py-5 border-b-2 border-current transition-colors ${dark ? 'hover:bg-white/[0.03]' : 'hover:bg-ink/[0.03]'}`}>
-              <span className={`font-mono text-xs ${dark ? 'text-white/50' : 'text-ink/50'}`}>{o.period}</span>
-              <div className="flex items-center gap-3">
-                <h3 className="font-display uppercase text-lg md:text-xl tracking-tight leading-none group-hover:text-lime transition-colors">{o.role}</h3>
-                {o.current && <span className="font-mono text-[9px] font-bold uppercase px-2 py-0.5 bg-lime text-ink">Aktif</span>}
+            <motion.div key={i} variants={reveal} className={`grid md:grid-cols-[130px_1fr_auto] md:items-center gap-1 md:gap-6 py-5 ${i > 0 ? `border-t ${t.border}` : ''}`}>
+              <span className={`font-mono text-xs ${t.faint}`}>{o.period}</span>
+              <div className="flex items-center gap-2.5">
+                <h3 className={`text-base font-medium ${t.text}`}>{o.role}</h3>
+                {o.current && <span className="w-1.5 h-1.5 rounded-full bg-lime inline-block" />}
               </div>
-              <p className={`font-mono text-xs md:text-right ${dark ? 'text-white/55' : 'text-ink/55'}`}>{o.org}</p>
+              <p className={`text-sm md:text-right ${t.muted}`}>{o.org}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -444,27 +394,22 @@ function Organizations({ dark }: { dark: boolean }) {
 
 // ─── Projects ───────────────────────────────────────────────────────────────
 function Projects({ dark }: { dark: boolean }) {
+  const t = T(dark)
   return (
-    <section id="projects" className={`py-20 md:py-28 border-t-2 ${dark ? 'bg-[#0A0A0A] text-white border-white/15' : 'bg-paper text-ink border-ink/15'}`}>
-      <div className="max-w-7xl mx-auto px-5 md:px-8">
-        <SectionTag n="05" label="Selected Work" dark={dark} />
-        <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.9] tracking-tight mb-12">
-          Karya Saya<span className="text-lime">.</span>
-        </motion.h2>
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-2 gap-5">
+    <section id="projects" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
+      <div className="max-w-5xl mx-auto px-5 md:px-8">
+        <SectionHead n="05" label="Selected Work" title="Karya saya" dark={dark} />
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-2 gap-4">
           {projects.map((p) => (
-            <motion.div key={p.id} variants={reveal} className="group border-2 border-current p-6 md:p-8 transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-lime-lg">
-              <div className="flex items-start justify-between mb-6">
-                <span className="font-display text-5xl md:text-6xl text-lime leading-none">{p.id}</span>
-                <div className="w-11 h-11 border-2 border-current flex items-center justify-center group-hover:bg-lime group-hover:text-ink group-hover:border-lime transition-colors">{p.icon}</div>
+            <motion.div key={p.id} variants={reveal} className={`rounded-2xl border p-6 md:p-7 transition-colors ${t.border} ${t.hover}`}>
+              <div className="flex items-center justify-between mb-5">
+                <span className={`font-mono text-xs ${t.faint}`}>{p.id} / {p.category}</span>
+                <span className={t.muted}>{p.icon}</span>
               </div>
-              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-lime mb-2">{p.category}</p>
-              <h3 className="font-display uppercase text-2xl tracking-tight leading-tight mb-3">{p.title}</h3>
-              <p className={`text-sm leading-relaxed mb-5 ${dark ? 'text-white/65' : 'text-ink/65'}`}>{p.description}</p>
+              <h3 className={`text-xl font-semibold tracking-tight mb-2 ${t.text}`}>{p.title}</h3>
+              <p className={`text-sm leading-relaxed mb-5 ${t.muted}`}>{p.description}</p>
               <div className="flex flex-wrap gap-2">
-                {p.tags.map((t) => (
-                  <span key={t} className={`font-mono text-[10px] uppercase px-2 py-1 border ${dark ? 'border-white/20 text-white/60' : 'border-ink/20 text-ink/60'}`}>{t}</span>
-                ))}
+                {p.tags.map((tag) => <span key={tag} className={`text-xs px-2.5 py-1 rounded-full ${dark ? 'bg-white/5 text-neutral-400' : 'bg-black/5 text-neutral-500'}`}>{tag}</span>)}
               </div>
             </motion.div>
           ))}
@@ -476,22 +421,20 @@ function Projects({ dark }: { dark: boolean }) {
 
 // ─── Clients ────────────────────────────────────────────────────────────────
 function Clients({ dark }: { dark: boolean }) {
+  const t = T(dark)
   return (
-    <section id="clients" className={`py-20 md:py-28 border-t-2 ${dark ? 'bg-[#0A0A0A] text-white border-white/15' : 'bg-paper text-ink border-ink/15'}`}>
-      <div className="max-w-7xl mx-auto px-5 md:px-8">
-        <SectionTag n="06" label="Clients & Collab" dark={dark} />
-        <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.9] tracking-tight mb-12">
-          Klien & Kolaborasi<span className="text-lime">.</span>
-        </motion.h2>
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-0 border-t-2 border-l-2 border-current">
+    <section id="clients" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
+      <div className="max-w-5xl mx-auto px-5 md:px-8">
+        <SectionHead n="06" label="Clients & Collab" title="Klien & kolaborasi" dark={dark} />
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {clients.map((c) => (
-            <motion.div key={c.name} variants={reveal} className="group border-r-2 border-b-2 border-current p-4 flex flex-col items-center justify-center gap-3 transition-colors hover:bg-lime">
-              <div className="h-14 w-full bg-white border-2 border-ink flex items-center justify-center px-3">
-                <img src={c.logo} alt={c.name} className="max-h-9 max-w-full object-contain grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all" loading="lazy" />
+            <motion.div key={c.name} variants={reveal} className={`group rounded-xl border p-4 flex flex-col items-center gap-3 transition-colors ${t.border} ${t.hover}`}>
+              <div className="h-12 w-full rounded-lg bg-white flex items-center justify-center px-2.5">
+                <img src={c.logo} alt={c.name} className="max-h-8 max-w-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all" loading="lazy" />
               </div>
               <div className="text-center">
-                <p className="font-mono text-[11px] font-bold leading-tight group-hover:text-ink">{c.name}</p>
-                <p className={`font-mono text-[9px] uppercase mt-0.5 group-hover:text-ink/70 ${dark ? 'text-white/45' : 'text-ink/45'}`}>{c.tag}</p>
+                <p className={`text-[11px] font-medium leading-tight ${t.text}`}>{c.name}</p>
+                <p className={`text-[9px] mt-0.5 ${t.faint}`}>{c.tag}</p>
               </div>
             </motion.div>
           ))}
@@ -501,38 +444,37 @@ function Clients({ dark }: { dark: boolean }) {
   )
 }
 
-// ─── Contact / Footer ────────────────────────────────────────────────────────
+// ─── Footer / Contact ────────────────────────────────────────────────────────
 function Footer({ dark }: { dark: boolean }) {
+  const t = T(dark)
   return (
-    <footer id="contact" className="bg-lime text-ink">
-      <Marquee dark={dark} invert reverse items={["Let's Build Something", 'Collab', 'Wedding Film', 'Web Dev', 'Security']} />
-      <div className="max-w-7xl mx-auto px-5 md:px-8 pt-16 md:pt-24 pb-10">
-        <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] mb-6">(07) — Contact</p>
-        <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(2.6rem,10vw,8rem)] leading-[0.85] tracking-tight mb-10">
-          Mari<br />Berkolaborasi.
+    <footer id="contact" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
+      <div className="max-w-5xl mx-auto px-5 md:px-8">
+        <p className={`font-mono text-xs mb-5 ${t.muted}`}><span className="text-lime">07</span> · Contact</p>
+        <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className={`text-4xl md:text-6xl font-semibold tracking-tight mb-8 ${t.text}`}>
+          Mari berkolaborasi<span className="text-lime">.</span>
         </motion.h2>
+        <p className={`text-base max-w-md mb-10 ${t.muted}`}>Terbuka untuk proyek videografi, pengembangan web, diskusi keamanan siber, dan peluang kerja lainnya.</p>
 
-        <div className="grid sm:grid-cols-2 gap-4 mb-12">
-          <a href="https://wa.me/62895346038858" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between border-2 border-ink p-5 bg-ink text-lime hover:bg-transparent hover:text-ink transition-colors">
-            <span className="font-mono text-sm"><Phone size={14} className="inline mr-2" />+62 895-3460-38858</span>
-            <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+        <div className="flex flex-col sm:flex-row gap-3 mb-12 max-w-xl">
+          <a href="https://wa.me/62895346038858" target="_blank" rel="noopener noreferrer" className={`group flex-1 flex items-center justify-between px-5 h-12 rounded-full text-sm transition-colors ${dark ? 'bg-white text-black hover:bg-lime' : 'bg-black text-white hover:bg-lime hover:text-black'}`}>
+            <span className="flex items-center gap-2"><Phone size={14} /> +62 895-3460-38858</span>
+            <ArrowUpRight size={16} />
           </a>
-          <a href="mailto:rifkiorangke2@gmail.com" className="group flex items-center justify-between border-2 border-ink p-5 hover:bg-ink hover:text-lime transition-colors">
-            <span className="font-mono text-sm break-all">rifkiorangke2@gmail.com</span>
-            <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform shrink-0" />
+          <a href="mailto:rifkiorangke2@gmail.com" className={`group flex-1 flex items-center justify-between px-5 h-12 rounded-full text-sm border transition-colors ${t.border} ${t.text} hover:border-lime`}>
+            <span className="truncate">rifkiorangke2@gmail.com</span>
+            <ArrowUpRight size={16} className="shrink-0" />
           </a>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 mb-14">
-          {SOCIALS.map((s) => (
-            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="w-12 h-12 border-2 border-ink flex items-center justify-center hover:bg-ink hover:text-lime transition-colors">{s.icon}</a>
-          ))}
-          <span className="font-mono text-xs ml-1 flex items-center gap-1.5"><MapPin size={13} /> Pandeglang, Indonesia</span>
+        <div className={`flex items-center gap-3 mb-14 ${t.muted}`}>
+          {SOCIALS.map((s) => <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="hover:text-lime transition-colors">{s.icon}</a>)}
+          <span className="text-sm flex items-center gap-1.5 ml-2"><MapPin size={13} /> Pandeglang, Indonesia</span>
         </div>
 
-        <div className="border-t-2 border-ink pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <span className="font-display uppercase text-xl">MRH<span className="text-ink">©</span> 2026</span>
-          <span className="font-mono text-[11px] uppercase tracking-wider">Designed & Built with intent — Not by template.</span>
+        <div className={`pt-6 border-t ${t.border} flex flex-col sm:flex-row justify-between gap-2 font-mono text-xs ${t.faint}`}>
+          <span>© 2026 Muhammad Rifki Hidayatulloh</span>
+          <span>Built with intent.</span>
         </div>
       </div>
     </footer>
@@ -543,9 +485,8 @@ function Footer({ dark }: { dark: boolean }) {
 export default function App() {
   const [dark, setDark] = useState(true)
   useEffect(() => { document.documentElement.classList.toggle('dark', dark) }, [dark])
-
   return (
-    <div className={`grain ${dark ? 'bg-[#0A0A0A]' : 'bg-paper'}`}>
+    <div className={dark ? 'bg-[#0B0B0B]' : 'bg-[#FAF9F6]'}>
       <Navbar dark={dark} toggleDark={() => setDark(!dark)} />
       <Hero dark={dark} />
       <About dark={dark} />
