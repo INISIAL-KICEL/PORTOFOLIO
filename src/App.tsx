@@ -38,7 +38,7 @@ const stagger: any = {
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const experiences = [
   {
-    role: 'Owner & Videographer',
+    role: 'Founder & Owner',
     company: 'HISTORIS KITA',
     type: 'Part-time',
     period: '2023 - Sekarang',
@@ -46,6 +46,16 @@ const experiences = [
     icon: <Video size={16} />,
     tags: ['Adobe Premiere Pro', 'Sinematografi', 'Color Grading'],
     accent: 'from-rose-500/20 to-pink-500/10',
+  },
+  {
+    role: 'Founder & IT Consultant',
+    company: 'SarvaNet.id',
+    type: 'Founder',
+    period: '2025 - Sekarang',
+    desc: 'Layanan konsultasi internet dan strategi penerapan jaringan (Network Deployment). Merancang topologi jaringan berbasis Cisco dan analisis teknis untuk klien berskala institusi/kampus.',
+    icon: <Shield size={16} />,
+    tags: ['Cisco', 'Network Deployment', 'IT Consulting'],
+    accent: 'from-cyan-500/20 to-blue-500/10',
   },
   {
     role: 'AI Video Editor',
@@ -56,6 +66,16 @@ const experiences = [
     icon: <Code size={16} />,
     tags: ['Adobe Premiere Pro', 'AI Tools', 'Digital Marketing'],
     accent: 'from-violet-500/20 to-indigo-500/10',
+  },
+  {
+    role: 'Asisten Praktikum Fisika Dasar',
+    company: 'FST, UIN SMH Banten',
+    type: 'Kampus',
+    period: '2025',
+    desc: 'Mendampingi praktikum Fisika Dasar bagi mahasiswa Fakultas Sains dan Teknologi, membimbing eksperimen dan analisis laboratorium.',
+    icon: <Users size={16} />,
+    tags: ['Asistensi', 'Laboratorium', 'Fisika'],
+    accent: 'from-amber-500/20 to-orange-500/10',
   },
 ]
 
@@ -72,10 +92,52 @@ const certifications = [
       },
       {
         title: 'AI Solution Workshop: End-to-End AI Model Solutions',
-        issuer: 'Microsoft Elevate',
+        issuer: 'Microsoft',
         date: 'Feb 2026',
         icon: <Code size={14} />,
         color: 'text-blue-400',
+      },
+      {
+        title: 'Security Gaps di Era AI-Driven: Bedah Keamanan Website',
+        issuer: 'DomaiNesia',
+        date: '2026',
+        icon: <Shield size={14} />,
+        color: 'text-violet-400',
+      },
+      {
+        title: 'Badan Ekraf Digital Talent 2026',
+        issuer: 'BEKRAF',
+        date: '2026',
+        icon: <Award size={14} />,
+        color: 'text-amber-400',
+      },
+      {
+        title: 'Belajar Prinsip Pemrograman SOLID',
+        issuer: 'Dicoding Indonesia',
+        date: '2026',
+        icon: <Code size={14} />,
+        color: 'text-blue-400',
+      },
+      {
+        title: 'Memulai Pemrograman Dengan Java',
+        issuer: 'Dicoding Indonesia',
+        date: '2026',
+        icon: <Code size={14} />,
+        color: 'text-blue-400',
+      },
+      {
+        title: 'Pemrograman Dart Dasar',
+        issuer: 'ID-Networkers (IDN.ID)',
+        date: '2026',
+        icon: <Code size={14} />,
+        color: 'text-blue-400',
+      },
+      {
+        title: 'Basic Mikrotik & Basic Computer Network',
+        issuer: 'ID-Networkers (IDN.ID)',
+        date: '2026',
+        icon: <Award size={14} />,
+        color: 'text-green-400',
       },
     ],
   },
@@ -83,53 +145,134 @@ const certifications = [
     year: '2025',
     items: [
       {
-        title: 'Cyber Security Bootcamp',
-        issuer: 'ID-Networkers (IDN.ID)',
-        date: 'Jan 2025',
+        title: 'X3F Cybersecurity Bootcamp',
+        issuer: 'Institut Teknologi Indonesia',
+        date: 'Nov 2025',
         icon: <Shield size={14} />,
         color: 'text-cyan-400',
       },
       {
         title: 'Cyber Security Bootcamp',
-        issuer: 'Institut Teknologi Indonesia',
-        date: 'Jan 2025',
+        issuer: 'ID-Networkers (IDN.ID)',
+        date: '2025',
         icon: <Shield size={14} />,
         color: 'text-cyan-400',
+      },
+      {
+        title: 'Webinar Cyber Security & Ethical Hacking',
+        issuer: 'Institut Teknologi Tangerang Selatan',
+        date: '2025',
+        icon: <Shield size={14} />,
+        color: 'text-cyan-400',
+      },
+      {
+        title: 'Ethical Hacker For Dummies',
+        issuer: 'Digital Talent Scholarship',
+        date: '2025',
+        icon: <Shield size={14} />,
+        color: 'text-cyan-400',
+      },
+      {
+        title: 'Introduction to Cloud Computing',
+        issuer: 'Digital Talent Scholarship',
+        date: '2025',
+        icon: <Code size={14} />,
+        color: 'text-blue-400',
+      },
+      {
+        title: 'Basic Cisco Certificate',
+        issuer: 'ID-Networkers (IDN.ID)',
+        date: '2025',
+        icon: <Award size={14} />,
+        color: 'text-green-400',
       },
       {
         title: 'Network Simulation Learning with PNETLab',
         issuer: 'ID-Networkers (IDN.ID)',
-        date: 'Jan 2025',
+        date: '2025',
         icon: <Award size={14} />,
         color: 'text-green-400',
       },
       {
-        title: 'Basic Cisco, Basic Mikrotik, & Basic Computer Network',
-        issuer: 'ID-Networkers (IDN.ID)',
-        date: 'Jan 2025',
-        icon: <Award size={14} />,
-        color: 'text-green-400',
+        title: 'Dicoding Developer Conference 2026',
+        issuer: 'Dicoding Indonesia',
+        date: '2025',
+        icon: <Code size={14} />,
+        color: 'text-blue-400',
+      },
+    ],
+  },
+  {
+    year: '2024',
+    items: [
+      {
+        title: 'Generative AI untuk Pendidikan (Micro Skill)',
+        issuer: 'Digital Talent Scholarship',
+        date: '2024',
+        icon: <Code size={14} />,
+        color: 'text-blue-400',
       },
     ],
   },
 ]
 
+const awards = [
+  {
+    title: 'Pramuka Garuda',
+    issuer: 'Tanda Kecakapan, Kwarcab Pandeglang',
+    date: '2023',
+  },
+  {
+    title: 'Juara 1 & Favorit Fotografi',
+    issuer: 'TGC In Action Competition, IPB University',
+    date: '2023',
+  },
+  {
+    title: 'Juara 1 Fotografi',
+    issuer: 'Communication Festival, HMPS KPI UIN Banten',
+    date: '2024',
+  },
+  {
+    title: 'Favorite Winner Photography',
+    issuer: 'ESA Festival, Univ. Sultan Ageng Tirtayasa',
+    date: '2022',
+  },
+]
+
 const organizations = [
   {
-    role: 'Koordinator Media',
-    org: 'Ikatan Remaja Masjid Agung Ar-Rahman KAB Pandeglang',
-    period: '2025 - Sekarang',
+    role: 'Bidang Ekonomi, UMKM & Startup',
+    org: 'HIPMI PT DPD Banten',
+    period: '2026 - Sekarang',
     current: true,
   },
   {
-    role: 'Anggota',
-    org: 'Satuan Karya Widya Budaya Bakti',
-    period: '2023 - 2024',
+    role: 'Ketua Departemen Eksternal',
+    org: 'HMPS Informatika, UIN SMH Banten',
+    period: '2026 - Sekarang',
+    current: true,
+  },
+  {
+    role: 'Ketua Pelaksana',
+    org: 'Mapansa Expo Campus 2026 (IKA-MAN Pandeglang)',
+    period: '2026',
     current: false,
   },
   {
-    role: 'Ketua Putra',
-    org: 'Dewan Ambalan KH Agus Salim MAN 1 Pandeglang',
+    role: 'Koordinator Multimedia',
+    org: 'IREMA Masjid Agung Ar-Rahman Pandeglang',
+    period: '2024 - Sekarang',
+    current: true,
+  },
+  {
+    role: 'Anggota Saka Widya Budaya',
+    org: 'Dinas Pendidikan Kab. Pandeglang',
+    period: '2023 - 2025',
+    current: false,
+  },
+  {
+    role: 'Ketua Dewan Ambalan Putra',
+    org: 'Dewan Ambalan KH Agus Salim, MAN 1 Pandeglang',
     period: '2022 - 2023',
     current: false,
   },
@@ -500,9 +643,9 @@ function About({ dark }: { dark: boolean }) {
             >
               {[
                 { value: '30+', label: 'Pernikahan Difilmkan' },
-                { value: '10+', label: 'Klien & Kolaborasi' },
-                { value: '5+', label: 'Sertifikasi' },
-                { value: '4+', label: 'Organisasi' },
+                { value: '18+', label: 'Sertifikasi' },
+                { value: '7+', label: 'Organisasi' },
+                { value: '4', label: 'Penghargaan' },
               ].map((s) => (
                 <motion.div
                   key={s.label}
@@ -619,7 +762,7 @@ function Certifications({ dark }: { dark: boolean }) {
             03 / Licenses &amp; Certifications
           </p>
           <h2 className={`text-4xl md:text-5xl font-black tracking-tight mb-16 ${dark ? 'text-white' : 'text-gray-900'}`}>
-            Sertifikasi.
+            Sertifikasi &amp; Penghargaan.
           </h2>
         </motion.div>
 
@@ -662,6 +805,43 @@ function Certifications({ dark }: { dark: boolean }) {
               </motion.div>
             </div>
           ))}
+
+          {/* Penghargaan & Prestasi */}
+          <div>
+            <motion.p
+              variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
+              className={`text-xs font-bold tracking-[0.2em] uppercase mb-5 ${dark ? 'text-amber-500/80' : 'text-amber-600'}`}
+            >
+              Penghargaan &amp; Prestasi
+            </motion.p>
+            <motion.div
+              variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+            >
+              {awards.map((aw, i) => (
+                <motion.div
+                  key={`${aw.title}-${i}`}
+                  variants={fadeUp}
+                  className={`group flex items-start gap-4 p-5 rounded-2xl border transition-all duration-200 ${dark ? 'border-amber-500/20 bg-amber-500/[0.04] hover:border-amber-500/40' : 'border-amber-200 bg-amber-50/60 hover:border-amber-300 hover:shadow-sm'}`}
+                >
+                  <div className={`mt-0.5 w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${dark ? 'bg-amber-500/10 text-amber-400' : 'bg-amber-100 text-amber-600'}`}>
+                    <Award size={14} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className={`text-sm font-semibold leading-snug mb-1 ${dark ? 'text-white' : 'text-gray-900'}`}>
+                      {aw.title}
+                    </p>
+                    <p className={`text-xs ${dark ? 'text-gray-500' : 'text-gray-500'}`}>
+                      {aw.issuer}
+                    </p>
+                    <p className={`text-[10px] mt-1 ${dark ? 'text-gray-700' : 'text-gray-400'}`}>
+                      {aw.date}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
