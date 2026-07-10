@@ -6,6 +6,16 @@ import {
   Code, ChevronDown, Menu, X, Award, Users,
 } from 'lucide-react'
 import fotoGue from './aset/gambar/foto-saya.png';
+import logoNeokasir from './aset/logos/neokasir.png'
+import logoMitsubishi from './aset/logos/mitsubishi.svg'
+import logoMasjid from './aset/logos/masjid.png'
+import logoSarvanet from './aset/logos/sarvanet.png'
+import logoHistoris from './aset/logos/historis.png'
+import logoRangkai from './aset/logos/rangkainalar.png'
+import logoSbd from './aset/logos/sbd.png'
+import logoRealtone from './aset/logos/realtone.png'
+import logoIkaman from './aset/logos/ikaman.png'
+import logoSdiu from './aset/logos/sdiu.png'
 
 // ─── Animation Variants ────────────────────────────────────────────────────────
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -31,7 +41,7 @@ const experiences = [
     role: 'Owner & Videographer',
     company: 'HISTORIS KITA',
     type: 'Part-time',
-    period: '2023 — Sekarang',
+    period: '2023 - Sekarang',
     desc: 'Produksi konten visual dengan fokus pada sinematografi pernikahan. Mengelola seluruh pipeline produksi dari pra-produksi hingga color grading menggunakan Adobe Premiere Pro.',
     icon: <Video size={16} />,
     tags: ['Adobe Premiere Pro', 'Sinematografi', 'Color Grading'],
@@ -41,7 +51,7 @@ const experiences = [
     role: 'AI Video Editor',
     company: 'Dalang.io',
     type: 'Contract',
-    period: 'Jun 2025 — Agt 2025',
+    period: 'Jun 2025 - Agt 2025',
     desc: 'Pengeditan video berbasis AI menggunakan Adobe Premiere Pro dan inisiatif Digital Marketing untuk konten skala besar dengan efisiensi tinggi.',
     icon: <Code size={16} />,
     tags: ['Adobe Premiere Pro', 'AI Tools', 'Digital Marketing'],
@@ -108,25 +118,25 @@ const organizations = [
   {
     role: 'Koordinator Media',
     org: 'Ikatan Remaja Masjid Agung Ar-Rahman KAB Pandeglang',
-    period: '2025 – Sekarang',
+    period: '2025 - Sekarang',
     current: true,
   },
   {
     role: 'Anggota',
     org: 'Satuan Karya Widya Budaya Bakti',
-    period: '2023 – 2024',
+    period: '2023 - 2024',
     current: false,
   },
   {
     role: 'Ketua Putra',
     org: 'Dewan Ambalan KH Agus Salim MAN 1 Pandeglang',
-    period: '2022 – 2023',
+    period: '2022 - 2023',
     current: false,
   },
   {
     role: 'Bendahara 2',
     org: 'Dewan Penggalang MTsN 1 Pandeglang',
-    period: '2019 – 2020',
+    period: '2019 - 2020',
     current: false,
   },
 ]
@@ -137,7 +147,7 @@ const projects = [
     category: 'WEDDING FILM',
     title: 'Cinematic Wedding Stories',
     description:
-      'Produksi video pernikahan full-service — dari pre-wedding shoot hingga same-day edit. Merekam momen autentik dengan pendekatan sinematik dan editorial.',
+      'Produksi video pernikahan full-service, dari pre-wedding shoot hingga same-day edit. Merekam momen autentik dengan pendekatan sinematik dan editorial.',
     tags: ['DJI Ronin', 'Sony FX3', 'Color Grade', 'Editorial'],
     icon: <Video size={18} />,
     accent: 'from-rose-500/20 to-pink-500/10',
@@ -167,11 +177,24 @@ const projects = [
     category: 'DEVELOPMENT',
     title: 'Full-Stack Web Projects',
     description:
-      'Membangun aplikasi web modern selama studi Informatika — dari sistem manajemen akademik hingga dashboard interaktif dengan use case nyata.',
+      'Membangun aplikasi web modern selama studi Informatika, dari sistem manajemen akademik hingga dashboard interaktif dengan use case nyata.',
     tags: ['React', 'Laravel', 'TypeScript', 'MySQL'],
     icon: <Code size={18} />,
     accent: 'from-amber-500/20 to-orange-500/10',
   },
+]
+
+const clients = [
+  { name: 'NeoKasir', logo: logoNeokasir, tag: 'Web Development' },
+  { name: 'Mitsubishi Depo Serang', logo: logoMitsubishi, tag: 'Company Profile' },
+  { name: 'IREMA Masjid Agung Ar-Rahman', logo: logoMasjid, tag: 'Multimedia' },
+  { name: 'SarvaNet.id', logo: logoSarvanet, tag: 'Founder' },
+  { name: 'Historis Kita', logo: logoHistoris, tag: 'Founder' },
+  { name: 'Rangkai Nalar', logo: logoRangkai, tag: 'Kolaborasi' },
+  { name: 'Sharing Bisnis Digital', logo: logoSbd, tag: 'Kolaborasi' },
+  { name: 'realtone.id', logo: logoRealtone, tag: 'Kolaborasi' },
+  { name: 'IKA-MAN Pandeglang', logo: logoIkaman, tag: 'Organisasi' },
+  { name: 'SDIU Cahaya Al-Fatih', logo: logoSdiu, tag: 'Klien' },
 ]
 
 // ─── Component: Navbar ────────────────────────────────────────────────────────
@@ -191,6 +214,7 @@ function Navbar({ dark, toggleDark }: { dark: boolean; toggleDark: () => void })
     { label: 'Certs', href: '#certifications' },
     { label: 'Org', href: '#organizations' },
     { label: 'Projects', href: '#projects' },
+    { label: 'Clients', href: '#clients' },
     { label: 'Contact', href: '#contact' },
   ]
 
@@ -383,7 +407,7 @@ function Hero({ dark }: { dark: boolean }) {
             </motion.div>
           </div>
 
-          {/* Right — portrait */}
+          {/* Right: portrait */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="flex justify-center lg:justify-end"
@@ -466,7 +490,7 @@ function About({ dark }: { dark: boolean }) {
               className={`text-sm leading-relaxed ${dark ? 'text-gray-400' : 'text-gray-600'}`}
             >
               Perpaduan latar belakang yang unik ini memungkinkan saya mendekati setiap masalah dari berbagai
-              sudut — kreativitas seorang filmmaker, presisi seorang developer, dan mindset analitis seorang
+              sudut: kreativitas seorang filmmaker, presisi seorang developer, dan mindset analitis seorang
               security researcher.
             </motion.p>
 
@@ -476,6 +500,7 @@ function About({ dark }: { dark: boolean }) {
             >
               {[
                 { value: '30+', label: 'Pernikahan Difilmkan' },
+                { value: '10+', label: 'Klien & Kolaborasi' },
                 { value: '5+', label: 'Sertifikasi' },
                 { value: '4+', label: 'Organisasi' },
               ].map((s) => (
@@ -755,6 +780,53 @@ function Projects({ dark }: { dark: boolean }) {
   )
 }
 
+// ─── Component: Clients & Collaborations ──────────────────────────────────────
+function Clients({ dark }: { dark: boolean }) {
+  return (
+    <section id="clients" className={`py-28 ${dark ? 'bg-[#0A0A0A]' : 'bg-[#FAFAFA]'}`}>
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <p className={`text-[10px] font-bold tracking-[0.25em] uppercase mb-4 ${dark ? 'text-gray-600' : 'text-gray-400'}`}>
+            06 / Clients &amp; Collaborations
+          </p>
+          <h2 className={`text-4xl md:text-5xl font-black tracking-tight mb-4 ${dark ? 'text-white' : 'text-gray-900'}`}>
+            Klien &amp; Kolaborasi.
+          </h2>
+          <p className={`text-sm mb-16 max-w-lg ${dark ? 'text-gray-500' : 'text-gray-500'}`}>
+            Brand, institusi, dan komunitas yang pernah mempercayakan proyek videografi, pengembangan web, jaringan, dan multimedia.
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4"
+        >
+          {clients.map((c) => (
+            <motion.div
+              key={c.name}
+              variants={fadeUp}
+              className={`group relative rounded-2xl border p-5 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:-translate-y-1 ${dark ? 'border-[#1F1F1F] bg-[#111111] hover:border-gray-700' : 'border-[#E8E8E8] bg-white hover:border-gray-300 hover:shadow-lg hover:shadow-gray-100'}`}
+            >
+              <div className="h-16 w-full rounded-xl bg-white flex items-center justify-center px-3">
+                <img
+                  src={c.logo}
+                  alt={c.name}
+                  className="max-h-11 max-w-full object-contain grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                  loading="lazy"
+                />
+              </div>
+              <div className="text-center">
+                <p className={`text-[11px] font-semibold leading-tight ${dark ? 'text-gray-300' : 'text-gray-800'}`}>{c.name}</p>
+                <p className={`text-[9px] mt-0.5 tracking-wide uppercase ${dark ? 'text-gray-600' : 'text-gray-400'}`}>{c.tag}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
 // ─── Component: Footer / Contact ──────────────────────────────────────────────
 function Footer({ dark }: { dark: boolean }) {
   const socials = [
@@ -767,7 +839,7 @@ function Footer({ dark }: { dark: boolean }) {
     <footer id="contact" className={dark ? 'bg-[#111111]' : 'bg-gray-900'}>
       <div className="max-w-6xl mx-auto px-6 pt-24 pb-16">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <p className="text-[10px] font-bold tracking-[0.25em] uppercase mb-6 text-gray-500">06 / Contact</p>
+          <p className="text-[10px] font-bold tracking-[0.25em] uppercase mb-6 text-gray-500">07 / Contact</p>
           <h2 className="text-4xl md:text-6xl font-black tracking-tight text-white mb-6 leading-tight">
             Mari Berkolaborasi<br />
             <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">Bersama.</span>
@@ -829,7 +901,7 @@ function Footer({ dark }: { dark: boolean }) {
 
         <div className={`border-t border-white/5 pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4`}>
           <span className="text-xs text-gray-700">
-            © 2025 Muhammad Rifki Hidayatulloh — Pandeglang, Indonesia.
+            © 2025 Muhammad Rifki Hidayatulloh · Pandeglang, Indonesia.
           </span>
           <div className="flex gap-6">
             {['About', 'Projects', 'Contact'].map((l) => (
@@ -861,6 +933,7 @@ export default function App() {
       <Certifications dark={dark} />
       <Organizations dark={dark} />
       <Projects dark={dark} />
+      <Clients dark={dark} />
       <Footer dark={dark} />
     </div>
   )
