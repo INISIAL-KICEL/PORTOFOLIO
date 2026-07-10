@@ -106,6 +106,33 @@ const organizations = [
   { role: 'Bendahara 2', org: 'Dewan Penggalang · MTsN 1 Pandeglang', period: '2019 — 2020', current: false },
 ]
 
+const publications = [
+  {
+    title: 'Analisis Keamanan Sistem Autentikasi Biometrik Iris Menggunakan Metode Cancelable Biometrics untuk Perlindungan Template',
+    venue: 'JATI — Jurnal Mahasiswa Teknik Informatika (ITN Malang)',
+    detail: 'Vol. 10 No. 2 (2026)',
+    date: 'Maret 2026',
+    doi: '10.36040/jati.v10i2.17234',
+    url: 'https://doi.org/10.36040/jati.v10i2.17234',
+    authors: ['Intan Nur Janah', 'Adila Muqtashida', 'Putri Dwi Manggali', 'Muhammad Rifki Hidayatullah', 'Muhammad Fadhil Dwisaputra', 'Ibnu Mas’ud'],
+    extra: '',
+    license: 'e-ISSN 2598-828X',
+    role: 'Co-Author',
+  },
+  {
+    title: 'Studi Sistem Input/Output: Perangkat, Interface, dan Optimalisasi Kinerja Komputer',
+    venue: 'Jurnal Riset Multidisiplin Edukasi (JURMIE)',
+    detail: 'Vol. 2 No. 6 · hlm. 363–369',
+    date: 'Juni 2025',
+    doi: '10.71282/jurmie.v2i6.451',
+    url: 'https://doi.org/10.71282/jurmie.v2i6.451',
+    authors: ['Muhammad Rifki Hidayatulloh', 'Fierren Al-Hilal Saepul Bahri', 'Adila Muqtashida', 'Rio Gunawan'],
+    extra: '+1 penulis',
+    license: 'CC BY-SA 4.0',
+    role: 'Penulis Pertama',
+  },
+]
+
 const projects = [
   { id: '01', category: 'Web · POS System', title: 'NeoKasir', description: 'Aplikasi kasir pintar multi-toko — kelola penjualan, stok, hutang, hingga pengiriman dalam satu dashboard.', tags: ['Node.js', 'MySQL', 'Dashboard'], url: 'https://neokasir.realtone.id', img: shotNeokasir },
   { id: '02', category: 'Web · Company Profile', title: 'Mitsubishi Dipo Serang', description: 'Company profile & katalog dealer resmi Mitsubishi Serang–Cilegon, lengkap dengan simulasi & test drive.', tags: ['Company Profile', 'Responsive', 'SEO'], url: 'https://mitsubishiserang.web.app', img: shotMitsubishi },
@@ -196,8 +223,8 @@ function Navbar({ dark, toggleDark }: { dark: boolean; toggleDark: () => void })
   }, [])
   const nav = [
     { label: 'About', href: '#about' }, { label: 'Work', href: '#experience' },
-    { label: 'Certs', href: '#certifications' }, { label: 'Org', href: '#organizations' },
-    { label: 'Projects', href: '#projects' }, { label: 'Clients', href: '#clients' },
+    { label: 'Certs', href: '#certifications' }, { label: 'Papers', href: '#publications' },
+    { label: 'Org', href: '#organizations' }, { label: 'Projects', href: '#projects' }, { label: 'Clients', href: '#clients' },
   ]
   return (
     <header className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${scrolled ? `${dark ? 'bg-[#0B0B0B]/80' : 'bg-[#FAF9F6]/80'} backdrop-blur border-b ${t.border}` : 'bg-transparent'}`}>
@@ -402,13 +429,49 @@ function Certifications({ dark }: { dark: boolean }) {
   )
 }
 
+// ─── Publications ───────────────────────────────────────────────────────────
+function Publications({ dark }: { dark: boolean }) {
+  const t = T(dark)
+  return (
+    <section id="publications" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
+      <div className="max-w-5xl mx-auto px-5 md:px-8">
+        <SectionHead n="04" label="Research" title="Publikasi ilmiah" dark={dark} />
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-4">
+          {publications.map((p, i) => (
+            <motion.a key={i} href={p.url} target="_blank" rel="noopener noreferrer" variants={reveal} className={`group block rounded-2xl border p-6 md:p-7 transition-colors ${t.border} ${t.hover}`}>
+              <div className="flex flex-wrap items-center gap-2 mb-4">
+                <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-lime text-black">Jurnal Nasional</span>
+                <span className={`text-[11px] px-2 py-0.5 rounded-full border ${t.border} ${t.muted}`}>{p.role}</span>
+                <span className={`text-[11px] px-2 py-0.5 rounded-full border ${t.border} ${t.muted}`}>PDF tersedia</span>
+              </div>
+              <h3 className={`text-lg md:text-xl font-semibold tracking-tight leading-snug mb-3 transition-colors group-hover:text-lime ${t.text}`}>{p.title}</h3>
+              <p className={`text-sm ${t.muted}`}>{p.venue} · {p.detail}</p>
+              <p className={`font-mono text-xs mt-1 ${t.faint}`}>{p.date} · DOI {p.doi} · {p.license}</p>
+              <p className={`text-sm mt-4 ${t.muted}`}>
+                {p.authors.map((a, idx) => (
+                  <span key={idx}>
+                    <span className={a.includes('Rifki') ? `${t.text} font-medium underline decoration-lime decoration-2 underline-offset-2` : ''}>{a}</span>
+                    {idx < p.authors.length - 1 ? ', ' : ''}
+                  </span>
+                ))}
+                {p.extra && <span className={t.faint}>, {p.extra}</span>}
+              </p>
+              <span className="inline-flex items-center gap-1.5 mt-5 text-sm font-medium text-lime">Baca paper <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" /></span>
+            </motion.a>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
 // ─── Organizations ──────────────────────────────────────────────────────────
 function Organizations({ dark }: { dark: boolean }) {
   const t = T(dark)
   return (
     <section id="organizations" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
       <div className="max-w-5xl mx-auto px-5 md:px-8">
-        <SectionHead n="04" label="Leadership" title="Organisasi" dark={dark} />
+        <SectionHead n="05" label="Leadership" title="Organisasi" dark={dark} />
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           {organizations.map((o, i) => (
             <motion.div key={i} variants={reveal} className={`grid md:grid-cols-[130px_1fr_auto] md:items-center gap-1 md:gap-6 py-5 ${i > 0 ? `border-t ${t.border}` : ''}`}>
@@ -432,7 +495,7 @@ function Projects({ dark }: { dark: boolean }) {
   return (
     <section id="projects" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
       <div className="max-w-5xl mx-auto px-5 md:px-8">
-        <SectionHead n="05" label="Selected Work" title="Karya saya" dark={dark} />
+        <SectionHead n="06" label="Selected Work" title="Karya saya" dark={dark} />
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-2 gap-x-6 gap-y-12">
           {projects.map((p) => (
             <motion.a key={p.id} href={p.url} target="_blank" rel="noopener noreferrer" variants={reveal} className="group block">
@@ -469,7 +532,7 @@ function Clients({ dark }: { dark: boolean }) {
   return (
     <section id="clients" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
       <div className="max-w-5xl mx-auto px-5 md:px-8">
-        <SectionHead n="06" label="Clients & Collab" title="Klien & kolaborasi" dark={dark} />
+        <SectionHead n="07" label="Clients & Collab" title="Klien & kolaborasi" dark={dark} />
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {clients.map((c) => (
             <motion.div key={c.name} variants={reveal} className={`group rounded-xl border p-4 flex flex-col items-center gap-3 transition-colors ${t.border} ${t.hover}`}>
@@ -494,7 +557,7 @@ function Footer({ dark }: { dark: boolean }) {
   return (
     <footer id="contact" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
       <div className="max-w-5xl mx-auto px-5 md:px-8">
-        <p className={`font-mono text-xs mb-5 ${t.muted}`}><span className="text-lime">07</span> · Contact</p>
+        <p className={`font-mono text-xs mb-5 ${t.muted}`}><span className="text-lime">08</span> · Contact</p>
         <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className={`text-4xl md:text-6xl font-semibold tracking-tight mb-8 ${t.text}`}>
           Mari berkolaborasi<span className="text-lime">.</span>
         </motion.h2>
@@ -537,6 +600,7 @@ export default function App() {
       <About dark={dark} />
       <WorkExperience dark={dark} />
       <Certifications dark={dark} />
+      <Publications dark={dark} />
       <Organizations dark={dark} />
       <Projects dark={dark} />
       <Clients dark={dark} />
