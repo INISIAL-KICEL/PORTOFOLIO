@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence, useScroll, useSpring, useInView } from 'framer-motion'
 import {
   Moon, Sun, MapPin, Phone, Github, Instagram,
   Linkedin, ArrowRight, ArrowUpRight, Video, Shield,
@@ -16,6 +16,10 @@ import logoSbd from './aset/logos/sbd.png'
 import logoRealtone from './aset/logos/realtone.png'
 import logoIkaman from './aset/logos/ikaman.png'
 import logoSdiu from './aset/logos/sdiu.png'
+import shotNeokasir from './aset/projects/neokasir.jpg'
+import shotMitsubishi from './aset/projects/mitsubishi.jpg'
+import shotBloomine from './aset/projects/bloomine.jpg'
+import shotHmps from './aset/projects/hmps.jpg'
 
 // ─── Motion ─────────────────────────────────────────────────────────────────
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -103,10 +107,10 @@ const organizations = [
 ]
 
 const projects = [
-  { id: '01', category: 'Wedding Film', title: 'Cinematic Wedding Stories', description: 'Produksi video pernikahan full-service, dari pre-wedding hingga same-day edit dengan pendekatan sinematik & editorial.', tags: ['DJI Ronin', 'Sony FX3', 'Color Grade'], icon: <Video size={18} /> },
-  { id: '02', category: 'Digital Security', title: 'CTF & Penetration Testing', description: 'Kompetisi Capture the Flag & web app pentesting. Fokus OWASP Top 10 dan metodologi ethical hacking.', tags: ['Kali Linux', 'Burp Suite', 'OWASP'], icon: <Shield size={18} /> },
-  { id: '03', category: 'Networking', title: 'Network Lab & Simulation', description: 'Simulasi jaringan dengan PNETLab. Konfigurasi Cisco & Mikrotik untuk infrastruktur enterprise dari nol.', tags: ['PNETLab', 'Cisco', 'Mikrotik'], icon: <Code size={18} /> },
-  { id: '04', category: 'Development', title: 'Full-Stack Web Projects', description: 'Aplikasi web modern — dari sistem manajemen akademik sampai dashboard interaktif dengan use case nyata.', tags: ['React', 'Laravel', 'TypeScript'], icon: <Code size={18} /> },
+  { id: '01', category: 'Web · POS System', title: 'NeoKasir', description: 'Aplikasi kasir pintar multi-toko — kelola penjualan, stok, hutang, hingga pengiriman dalam satu dashboard.', tags: ['Node.js', 'MySQL', 'Dashboard'], url: 'https://kasir-rizki-bangunan.web.app', img: shotNeokasir },
+  { id: '02', category: 'Web · Company Profile', title: 'Mitsubishi Dipo Serang', description: 'Company profile & katalog dealer resmi Mitsubishi Serang–Cilegon, lengkap dengan simulasi & test drive.', tags: ['Company Profile', 'Responsive', 'SEO'], url: 'https://mitsubishiserang.web.app', img: shotMitsubishi },
+  { id: '03', category: 'Web · E-Commerce', title: 'Bloomine Florist', description: 'Toko bunga & buket online premium dengan katalog, testimoni, dan pemesanan same-day delivery.', tags: ['E-Commerce', 'React', 'Tailwind'], url: 'https://bloomineflorist.web.app', img: shotBloomine },
+  { id: '04', category: 'Web · System', title: 'Sistem Rekrutmen HMPS', description: 'Aplikasi rekrutmen pengurus HMPS Informatika — jadwal wawancara, cek status seleksi, dan panel admin.', tags: ['Web App', 'Auth', 'Dashboard'], url: 'https://hmps-348a3.web.app', img: shotHmps },
 ]
 
 const clients = [
@@ -137,6 +141,33 @@ const T = (dark: boolean) => ({
   border: dark ? 'border-white/10' : 'border-black/10',
   hover: dark ? 'hover:bg-white/[0.03]' : 'hover:bg-black/[0.02]',
 })
+
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 })
+  return <motion.div style={{ scaleX }} className="fixed top-0 left-0 right-0 h-[2px] bg-lime origin-left z-[60]" />
+}
+
+function CountUp({ value, className }: { value: string; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-40px' })
+  const target = parseInt(value.replace(/\D/g, '')) || 0
+  const suffix = value.replace(/[0-9]/g, '')
+  const [n, setN] = useState(0)
+  useEffect(() => {
+    if (!inView) return
+    const dur = 1000, t0 = performance.now()
+    let raf = 0
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - t0) / dur)
+      setN(Math.round(target * (1 - Math.pow(1 - p, 3))))
+      if (p < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [inView, target])
+  return <span ref={ref} className={className}>{n}{suffix}</span>
+}
 
 function SectionHead({ n, label, title, dark }: { n: string; label: string; title: string; dark: boolean }) {
   const t = T(dark)
@@ -174,7 +205,10 @@ function Navbar({ dark, toggleDark }: { dark: boolean; toggleDark: () => void })
         <a href="#home" className={`text-sm font-semibold tracking-tight ${t.text}`}>MRH<span className="text-lime">.</span></a>
         <nav className="hidden md:flex items-center gap-7">
           {nav.map((it) => (
-            <a key={it.label} href={it.href} className={`text-sm transition-colors hover:text-lime ${t.muted}`}>{it.label}</a>
+            <a key={it.label} href={it.href} className={`group relative text-sm transition-colors hover:text-lime ${t.muted}`}>
+              {it.label}
+              <span className="absolute -bottom-1 left-0 h-px w-full bg-lime origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+            </a>
           ))}
         </nav>
         <div className="flex items-center gap-2">
@@ -216,10 +250,10 @@ function Hero({ dark }: { dark: boolean }) {
               Videographer, praktisi cybersecurity & jaringan, dan web developer. Mahasiswa Informatika UIN di Pandeglang, Banten.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }} className="mt-9 flex flex-wrap items-center gap-3">
-              <a href="#projects" className={`group inline-flex items-center gap-2 px-5 h-11 rounded-full text-sm font-medium transition-colors ${dark ? 'bg-white text-black hover:bg-lime' : 'bg-black text-white hover:bg-lime hover:text-black'}`}>
+              <a href="#projects" className={`group inline-flex items-center gap-2 px-5 h-11 rounded-full text-sm font-medium transition-all hover:scale-[1.03] active:scale-95 ${dark ? 'bg-white text-black hover:bg-lime' : 'bg-black text-white hover:bg-lime hover:text-black'}`}>
                 Lihat Karya <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
               </a>
-              <a href="#contact" className={`inline-flex items-center px-5 h-11 rounded-full text-sm font-medium border transition-colors ${t.border} ${t.text} hover:border-lime`}>Hubungi Saya</a>
+              <a href="#contact" className={`inline-flex items-center px-5 h-11 rounded-full text-sm font-medium border transition-all hover:scale-[1.03] active:scale-95 ${t.border} ${t.text} hover:border-lime`}>Hubungi Saya</a>
               <div className="flex items-center gap-1 ml-1">
                 {SOCIALS.map((s) => (
                   <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${t.muted} hover:text-lime`}>{s.icon}</a>
@@ -266,7 +300,7 @@ function About({ dark }: { dark: boolean }) {
             <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-4 gap-4 mt-10">
               {stats.map((s) => (
                 <motion.div key={s.l} variants={reveal}>
-                  <div className={`text-2xl md:text-3xl font-semibold ${t.text}`}>{s.v}</div>
+                  <CountUp value={s.v} className={`text-2xl md:text-3xl font-semibold ${t.text}`} />
                   <div className={`text-[11px] mt-1 ${t.faint}`}>{s.l}</div>
                 </motion.div>
               ))}
@@ -399,19 +433,29 @@ function Projects({ dark }: { dark: boolean }) {
     <section id="projects" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
       <div className="max-w-5xl mx-auto px-5 md:px-8">
         <SectionHead n="05" label="Selected Work" title="Karya saya" dark={dark} />
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-2 gap-4">
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-2 gap-x-6 gap-y-12">
           {projects.map((p) => (
-            <motion.div key={p.id} variants={reveal} className={`rounded-2xl border p-6 md:p-7 transition-colors ${t.border} ${t.hover}`}>
-              <div className="flex items-center justify-between mb-5">
-                <span className={`font-mono text-xs ${t.faint}`}>{p.id} / {p.category}</span>
-                <span className={t.muted}>{p.icon}</span>
+            <motion.a key={p.id} href={p.url} target="_blank" rel="noopener noreferrer" variants={reveal} className="group block">
+              <div className={`relative overflow-hidden rounded-2xl border ${t.border} aspect-[16/10]`}>
+                <img src={p.img} alt={p.title} className="w-full h-full object-cover object-top transition-transform duration-[600ms] ease-out group-hover:scale-[1.06]" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-4 left-5 right-5 flex items-center justify-between translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                  <span className="text-white text-sm font-medium">Kunjungi situs</span>
+                  <span className="w-9 h-9 rounded-full bg-lime text-black flex items-center justify-center"><ArrowUpRight size={17} /></span>
+                </div>
               </div>
-              <h3 className={`text-xl font-semibold tracking-tight mb-2 ${t.text}`}>{p.title}</h3>
-              <p className={`text-sm leading-relaxed mb-5 ${t.muted}`}>{p.description}</p>
-              <div className="flex flex-wrap gap-2">
-                {p.tags.map((tag) => <span key={tag} className={`text-xs px-2.5 py-1 rounded-full ${dark ? 'bg-white/5 text-neutral-400' : 'bg-black/5 text-neutral-500'}`}>{tag}</span>)}
+              <div className="mt-4">
+                <div className="flex items-center justify-between">
+                  <span className={`font-mono text-xs ${t.faint}`}>{p.id} · {p.category}</span>
+                  <ArrowUpRight size={15} className={`${t.faint} group-hover:text-lime group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all`} />
+                </div>
+                <h3 className={`text-xl font-semibold tracking-tight mt-2 mb-2 transition-colors group-hover:text-lime ${t.text}`}>{p.title}</h3>
+                <p className={`text-sm leading-relaxed mb-4 ${t.muted}`}>{p.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {p.tags.map((tag) => <span key={tag} className={`text-xs px-2.5 py-1 rounded-full ${dark ? 'bg-white/5 text-neutral-400' : 'bg-black/5 text-neutral-500'}`}>{tag}</span>)}
+                </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </motion.div>
       </div>
@@ -487,6 +531,7 @@ export default function App() {
   useEffect(() => { document.documentElement.classList.toggle('dark', dark) }, [dark])
   return (
     <div className={dark ? 'bg-[#0B0B0B]' : 'bg-[#FAF9F6]'}>
+      <ScrollProgress />
       <Navbar dark={dark} toggleDark={() => setDark(!dark)} />
       <Hero dark={dark} />
       <About dark={dark} />
