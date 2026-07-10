@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Moon, Sun, MapPin, Phone, Github, Instagram,
-  Linkedin, ExternalLink, ArrowRight, Video, Shield,
-  Code, ChevronDown, Menu, X, Award, Users,
+  Linkedin, ArrowRight, ArrowUpRight, Video, Shield,
+  Code, Menu, X, Award, Users, Star,
 } from 'lucide-react'
-import fotoGue from './aset/gambar/foto-saya.png';
+import fotoGue from './aset/gambar/foto-saya.png'
 import logoNeokasir from './aset/logos/neokasir.png'
 import logoMitsubishi from './aset/logos/mitsubishi.svg'
 import logoMasjid from './aset/logos/masjid.png'
@@ -17,320 +17,102 @@ import logoRealtone from './aset/logos/realtone.png'
 import logoIkaman from './aset/logos/ikaman.png'
 import logoSdiu from './aset/logos/sdiu.png'
 
-// ─── Animation Variants ────────────────────────────────────────────────────────
+// ─── Motion ─────────────────────────────────────────────────────────────────
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const fadeUp: any = {
-  hidden: { opacity: 0, y: 26 },
+const reveal: any = {
+  hidden: { opacity: 0, y: 28 },
   visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut', delay: i * 0.08 },
+    opacity: 1, y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: i * 0.05 },
   }),
 }
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const stagger: any = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.09 } },
-}
+const stagger: any = { hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }
 
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
+// ─── Data ──────────────────────────────────────────────────────────────────
 const experiences = [
   {
-    role: 'Founder & Owner',
-    company: 'HISTORIS KITA',
-    type: 'Part-time',
-    period: '2023 - Sekarang',
-    desc: 'Produksi konten visual dengan fokus pada sinematografi pernikahan. Mengelola seluruh pipeline produksi dari pra-produksi hingga color grading menggunakan Adobe Premiere Pro.',
-    icon: <Video size={16} />,
-    tags: ['Adobe Premiere Pro', 'Sinematografi', 'Color Grading'],
-    accent: 'from-rose-500/20 to-pink-500/10',
+    role: 'Founder & Owner', company: 'HISTORIS KITA', type: 'PART-TIME', period: '2023 — NOW',
+    desc: 'Rumah produksi visual fokus sinematografi pernikahan. Mengelola pipeline penuh dari pra-produksi hingga color grading (Adobe Premiere Pro).',
+    icon: <Video size={18} />, tags: ['Premiere Pro', 'Sinematografi', 'Color Grade'],
   },
   {
-    role: 'Founder & IT Consultant',
-    company: 'SarvaNet.id',
-    type: 'Founder',
-    period: '2025 - Sekarang',
-    desc: 'Layanan konsultasi internet dan strategi penerapan jaringan (Network Deployment). Merancang topologi jaringan berbasis Cisco dan analisis teknis untuk klien berskala institusi/kampus.',
-    icon: <Shield size={16} />,
-    tags: ['Cisco', 'Network Deployment', 'IT Consulting'],
-    accent: 'from-cyan-500/20 to-blue-500/10',
+    role: 'Founder & IT Consultant', company: 'SARVANET.ID', type: 'FOUNDER', period: '2025 — NOW',
+    desc: 'Konsultasi internet & strategi penerapan jaringan. Merancang topologi berbasis Cisco dan analisis teknis untuk klien institusi/kampus.',
+    icon: <Shield size={18} />, tags: ['Cisco', 'Network Deployment', 'IT Consulting'],
   },
   {
-    role: 'AI Video Editor',
-    company: 'Dalang.io',
-    type: 'Contract',
-    period: 'Jun 2025 - Agt 2025',
-    desc: 'Pengeditan video berbasis AI menggunakan Adobe Premiere Pro dan inisiatif Digital Marketing untuk konten skala besar dengan efisiensi tinggi.',
-    icon: <Code size={16} />,
-    tags: ['Adobe Premiere Pro', 'AI Tools', 'Digital Marketing'],
-    accent: 'from-violet-500/20 to-indigo-500/10',
+    role: 'AI Video Editor', company: 'DALANG.IO', type: 'CONTRACT', period: '2025',
+    desc: 'Pengeditan video berbasis AI + inisiatif digital marketing untuk konten skala besar dengan efisiensi tinggi.',
+    icon: <Code size={18} />, tags: ['AI Tools', 'Premiere Pro', 'Digital Marketing'],
   },
   {
-    role: 'Asisten Praktikum Fisika Dasar',
-    company: 'FST, UIN SMH Banten',
-    type: 'Kampus',
-    period: '2025',
-    desc: 'Mendampingi praktikum Fisika Dasar bagi mahasiswa Fakultas Sains dan Teknologi, membimbing eksperimen dan analisis laboratorium.',
-    icon: <Users size={16} />,
-    tags: ['Asistensi', 'Laboratorium', 'Fisika'],
-    accent: 'from-amber-500/20 to-orange-500/10',
+    role: 'Asisten Praktikum Fisika', company: 'FST · UIN SMH BANTEN', type: 'KAMPUS', period: '2025',
+    desc: 'Mendampingi praktikum Fisika Dasar mahasiswa FST — membimbing eksperimen dan analisis laboratorium.',
+    icon: <Users size={18} />, tags: ['Asistensi', 'Lab', 'Fisika'],
   },
 ]
 
 const certifications = [
   {
-    year: '2026',
-    items: [
-      {
-        title: 'Securing the CI/CD: Effective Implementation of SAST & Secrets Scanning',
-        issuer: 'PT ITSEC Asia Tbk',
-        date: 'Mar 2026',
-        icon: <Shield size={14} />,
-        color: 'text-violet-400',
-      },
-      {
-        title: 'AI Solution Workshop: End-to-End AI Model Solutions',
-        issuer: 'Microsoft',
-        date: 'Feb 2026',
-        icon: <Code size={14} />,
-        color: 'text-blue-400',
-      },
-      {
-        title: 'Security Gaps di Era AI-Driven: Bedah Keamanan Website',
-        issuer: 'DomaiNesia',
-        date: '2026',
-        icon: <Shield size={14} />,
-        color: 'text-violet-400',
-      },
-      {
-        title: 'Badan Ekraf Digital Talent 2026',
-        issuer: 'BEKRAF',
-        date: '2026',
-        icon: <Award size={14} />,
-        color: 'text-amber-400',
-      },
-      {
-        title: 'Belajar Prinsip Pemrograman SOLID',
-        issuer: 'Dicoding Indonesia',
-        date: '2026',
-        icon: <Code size={14} />,
-        color: 'text-blue-400',
-      },
-      {
-        title: 'Memulai Pemrograman Dengan Java',
-        issuer: 'Dicoding Indonesia',
-        date: '2026',
-        icon: <Code size={14} />,
-        color: 'text-blue-400',
-      },
-      {
-        title: 'Pemrograman Dart Dasar',
-        issuer: 'ID-Networkers (IDN.ID)',
-        date: '2026',
-        icon: <Code size={14} />,
-        color: 'text-blue-400',
-      },
-      {
-        title: 'Basic Mikrotik & Basic Computer Network',
-        issuer: 'ID-Networkers (IDN.ID)',
-        date: '2026',
-        icon: <Award size={14} />,
-        color: 'text-green-400',
-      },
+    year: '2026', items: [
+      { title: 'Securing CI/CD: SAST & Secrets Scanning', issuer: 'PT ITSEC Asia Tbk' },
+      { title: 'AI Solution Workshop: End-to-End AI Model', issuer: 'Microsoft' },
+      { title: 'Security Gaps di Era AI-Driven', issuer: 'DomaiNesia' },
+      { title: 'Badan Ekraf Digital Talent 2026', issuer: 'BEKRAF' },
+      { title: 'Belajar Prinsip Pemrograman SOLID', issuer: 'Dicoding Indonesia' },
+      { title: 'Memulai Pemrograman Dengan Java', issuer: 'Dicoding Indonesia' },
+      { title: 'Pemrograman Dart Dasar', issuer: 'ID-Networkers (IDN.ID)' },
+      { title: 'Basic Mikrotik & Computer Network', issuer: 'ID-Networkers (IDN.ID)' },
     ],
   },
   {
-    year: '2025',
-    items: [
-      {
-        title: 'X3F Cybersecurity Bootcamp',
-        issuer: 'Institut Teknologi Indonesia',
-        date: 'Nov 2025',
-        icon: <Shield size={14} />,
-        color: 'text-cyan-400',
-      },
-      {
-        title: 'Cyber Security Bootcamp',
-        issuer: 'ID-Networkers (IDN.ID)',
-        date: '2025',
-        icon: <Shield size={14} />,
-        color: 'text-cyan-400',
-      },
-      {
-        title: 'Webinar Cyber Security & Ethical Hacking',
-        issuer: 'Institut Teknologi Tangerang Selatan',
-        date: '2025',
-        icon: <Shield size={14} />,
-        color: 'text-cyan-400',
-      },
-      {
-        title: 'Ethical Hacker For Dummies',
-        issuer: 'Digital Talent Scholarship',
-        date: '2025',
-        icon: <Shield size={14} />,
-        color: 'text-cyan-400',
-      },
-      {
-        title: 'Introduction to Cloud Computing',
-        issuer: 'Digital Talent Scholarship',
-        date: '2025',
-        icon: <Code size={14} />,
-        color: 'text-blue-400',
-      },
-      {
-        title: 'Basic Cisco Certificate',
-        issuer: 'ID-Networkers (IDN.ID)',
-        date: '2025',
-        icon: <Award size={14} />,
-        color: 'text-green-400',
-      },
-      {
-        title: 'Network Simulation Learning with PNETLab',
-        issuer: 'ID-Networkers (IDN.ID)',
-        date: '2025',
-        icon: <Award size={14} />,
-        color: 'text-green-400',
-      },
-      {
-        title: 'Dicoding Developer Conference 2026',
-        issuer: 'Dicoding Indonesia',
-        date: '2025',
-        icon: <Code size={14} />,
-        color: 'text-blue-400',
-      },
+    year: '2025', items: [
+      { title: 'X3F Cybersecurity Bootcamp', issuer: 'Institut Teknologi Indonesia' },
+      { title: 'Cyber Security Bootcamp', issuer: 'ID-Networkers (IDN.ID)' },
+      { title: 'Webinar Cyber Security & Ethical Hacking', issuer: 'Inst. Tek. Tangerang Selatan' },
+      { title: 'Ethical Hacker For Dummies', issuer: 'Digital Talent Scholarship' },
+      { title: 'Introduction to Cloud Computing', issuer: 'Digital Talent Scholarship' },
+      { title: 'Basic Cisco Certificate', issuer: 'ID-Networkers (IDN.ID)' },
+      { title: 'Network Simulation with PNETLab', issuer: 'ID-Networkers (IDN.ID)' },
+      { title: 'Dicoding Developer Conference', issuer: 'Dicoding Indonesia' },
     ],
   },
   {
-    year: '2024',
-    items: [
-      {
-        title: 'Generative AI untuk Pendidikan (Micro Skill)',
-        issuer: 'Digital Talent Scholarship',
-        date: '2024',
-        icon: <Code size={14} />,
-        color: 'text-blue-400',
-      },
+    year: '2024', items: [
+      { title: 'Generative AI untuk Pendidikan (Micro Skill)', issuer: 'Digital Talent Scholarship' },
     ],
   },
 ]
 
 const awards = [
-  {
-    title: 'Pramuka Garuda',
-    issuer: 'Tanda Kecakapan, Kwarcab Pandeglang',
-    date: '2023',
-  },
-  {
-    title: 'Juara 1 & Favorit Fotografi',
-    issuer: 'TGC In Action Competition, IPB University',
-    date: '2023',
-  },
-  {
-    title: 'Juara 1 Fotografi',
-    issuer: 'Communication Festival, HMPS KPI UIN Banten',
-    date: '2024',
-  },
-  {
-    title: 'Favorite Winner Photography',
-    issuer: 'ESA Festival, Univ. Sultan Ageng Tirtayasa',
-    date: '2022',
-  },
+  { title: 'Pramuka Garuda', issuer: 'Tanda Kecakapan · Kwarcab Pandeglang', date: '2023' },
+  { title: 'Juara 1 & Favorit Fotografi', issuer: 'TGC In Action · IPB University', date: '2023' },
+  { title: 'Juara 1 Fotografi', issuer: 'Communication Festival · HMPS KPI UIN', date: '2024' },
+  { title: 'Favorite Winner Photography', issuer: 'ESA Festival · Untirta', date: '2022' },
 ]
 
 const organizations = [
-  {
-    role: 'Bidang Ekonomi, UMKM & Startup',
-    org: 'HIPMI PT DPD Banten',
-    period: '2026 - Sekarang',
-    current: true,
-  },
-  {
-    role: 'Ketua Departemen Eksternal',
-    org: 'HMPS Informatika, UIN SMH Banten',
-    period: '2026 - Sekarang',
-    current: true,
-  },
-  {
-    role: 'Ketua Pelaksana',
-    org: 'Mapansa Expo Campus 2026 (IKA-MAN Pandeglang)',
-    period: '2026',
-    current: false,
-  },
-  {
-    role: 'Koordinator Multimedia',
-    org: 'IREMA Masjid Agung Ar-Rahman Pandeglang',
-    period: '2024 - Sekarang',
-    current: true,
-  },
-  {
-    role: 'Anggota Saka Widya Budaya',
-    org: 'Dinas Pendidikan Kab. Pandeglang',
-    period: '2023 - 2025',
-    current: false,
-  },
-  {
-    role: 'Ketua Dewan Ambalan Putra',
-    org: 'Dewan Ambalan KH Agus Salim, MAN 1 Pandeglang',
-    period: '2022 - 2023',
-    current: false,
-  },
-  {
-    role: 'Bendahara 2',
-    org: 'Dewan Penggalang MTsN 1 Pandeglang',
-    period: '2019 - 2020',
-    current: false,
-  },
+  { role: 'Bidang Ekonomi, UMKM & Startup', org: 'HIPMI PT DPD Banten', period: '2026 — NOW', current: true },
+  { role: 'Ketua Departemen Eksternal', org: 'HMPS Informatika · UIN SMH Banten', period: '2026 — NOW', current: true },
+  { role: 'Ketua Pelaksana', org: 'Mapansa Expo Campus 2026 · IKA-MAN', period: '2026', current: false },
+  { role: 'Koordinator Multimedia', org: 'IREMA Masjid Agung Ar-Rahman', period: '2024 — NOW', current: true },
+  { role: 'Anggota Saka Widya Budaya', org: 'Dinas Pendidikan Kab. Pandeglang', period: '2023 — 2025', current: false },
+  { role: 'Ketua Dewan Ambalan Putra', org: 'KH Agus Salim · MAN 1 Pandeglang', period: '2022 — 2023', current: false },
+  { role: 'Bendahara 2', org: 'Dewan Penggalang · MTsN 1 Pandeglang', period: '2019 — 2020', current: false },
 ]
 
 const projects = [
-  {
-    id: 1,
-    category: 'WEDDING FILM',
-    title: 'Cinematic Wedding Stories',
-    description:
-      'Produksi video pernikahan full-service, dari pre-wedding shoot hingga same-day edit. Merekam momen autentik dengan pendekatan sinematik dan editorial.',
-    tags: ['DJI Ronin', 'Sony FX3', 'Color Grade', 'Editorial'],
-    icon: <Video size={18} />,
-    accent: 'from-rose-500/20 to-pink-500/10',
-  },
-  {
-    id: 2,
-    category: 'DIGITAL SECURITY',
-    title: 'CTF & Penetration Testing',
-    description:
-      'Kompetisi Capture the Flag dan web application penetration testing. Fokus pada OWASP Top 10 vulnerabilities dan metodologi ethical hacking.',
-    tags: ['Kali Linux', 'Burp Suite', 'OWASP', 'CTF'],
-    icon: <Shield size={18} />,
-    accent: 'from-violet-500/20 to-indigo-500/10',
-  },
-  {
-    id: 3,
-    category: 'NETWORKING',
-    title: 'Network Lab & Simulation',
-    description:
-      'Simulasi jaringan komputer menggunakan PNETLab. Konfigurasi Cisco dan Mikrotik untuk infrastruktur jaringan enterprise dari nol.',
-    tags: ['PNETLab', 'Cisco', 'Mikrotik', 'TCP/IP'],
-    icon: <Code size={18} />,
-    accent: 'from-cyan-500/20 to-blue-500/10',
-  },
-  {
-    id: 4,
-    category: 'DEVELOPMENT',
-    title: 'Full-Stack Web Projects',
-    description:
-      'Membangun aplikasi web modern selama studi Informatika, dari sistem manajemen akademik hingga dashboard interaktif dengan use case nyata.',
-    tags: ['React', 'Laravel', 'TypeScript', 'MySQL'],
-    icon: <Code size={18} />,
-    accent: 'from-amber-500/20 to-orange-500/10',
-  },
+  { id: '01', category: 'WEDDING FILM', title: 'Cinematic Wedding Stories', description: 'Produksi video pernikahan full-service, dari pre-wedding hingga same-day edit dengan pendekatan sinematik & editorial.', tags: ['DJI Ronin', 'Sony FX3', 'Color Grade'], icon: <Video size={20} /> },
+  { id: '02', category: 'DIGITAL SECURITY', title: 'CTF & Penetration Testing', description: 'Kompetisi Capture the Flag & web app pentesting. Fokus OWASP Top 10 dan metodologi ethical hacking.', tags: ['Kali Linux', 'Burp Suite', 'OWASP'], icon: <Shield size={20} /> },
+  { id: '03', category: 'NETWORKING', title: 'Network Lab & Simulation', description: 'Simulasi jaringan dengan PNETLab. Konfigurasi Cisco & Mikrotik untuk infrastruktur enterprise dari nol.', tags: ['PNETLab', 'Cisco', 'Mikrotik'], icon: <Code size={20} /> },
+  { id: '04', category: 'DEVELOPMENT', title: 'Full-Stack Web Projects', description: 'Aplikasi web modern — dari sistem manajemen akademik sampai dashboard interaktif dengan use case nyata.', tags: ['React', 'Laravel', 'TypeScript'], icon: <Code size={20} /> },
 ]
 
 const clients = [
   { name: 'NeoKasir', logo: logoNeokasir, tag: 'Web Development' },
   { name: 'Mitsubishi Depo Serang', logo: logoMitsubishi, tag: 'Company Profile' },
-  { name: 'IREMA Masjid Agung Ar-Rahman', logo: logoMasjid, tag: 'Multimedia' },
+  { name: 'IREMA Masjid Agung', logo: logoMasjid, tag: 'Multimedia' },
   { name: 'SarvaNet.id', logo: logoSarvanet, tag: 'Founder' },
   { name: 'Historis Kita', logo: logoHistoris, tag: 'Founder' },
   { name: 'Rangkai Nalar', logo: logoRangkai, tag: 'Kolaborasi' },
@@ -340,11 +122,47 @@ const clients = [
   { name: 'SDIU Cahaya Al-Fatih', logo: logoSdiu, tag: 'Klien' },
 ]
 
-// ─── Component: Navbar ────────────────────────────────────────────────────────
+const SOCIALS = [
+  { icon: <Github size={17} />, href: 'https://github.com/INISIAL-KICEL', label: 'GitHub' },
+  { icon: <Instagram size={17} />, href: 'https://www.instagram.com/inisial_kicel/', label: 'Instagram' },
+  { icon: <Linkedin size={17} />, href: 'https://www.linkedin.com/in/muhammad-rifki-hidayatulloh-7250782bb/', label: 'LinkedIn' },
+]
+
+// ─── Helpers ────────────────────────────────────────────────────────────────
+function Marquee({ items, dark, invert = false, reverse = false }: { items: string[]; dark: boolean; invert?: boolean; reverse?: boolean }) {
+  const bg = invert ? 'bg-lime text-ink' : dark ? 'bg-[#0A0A0A] text-white' : 'bg-ink text-white'
+  return (
+    <div className={`overflow-hidden border-y-2 ${invert ? 'border-ink' : 'border-white/20'} ${bg} py-3 md:py-4`}>
+      <div className={`marquee-track ${reverse ? 'animate-marquee-rev' : 'animate-marquee'}`}>
+        {[0, 1].map((k) => (
+          <div key={k} className="flex items-center shrink-0" aria-hidden={k === 1}>
+            {items.map((it, i) => (
+              <span key={i} className="flex items-center shrink-0">
+                <span className="font-display uppercase text-2xl md:text-4xl px-5 md:px-8 tracking-tight">{it}</span>
+                <Star size={18} className={invert ? 'text-ink' : 'text-lime'} fill="currentColor" />
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function SectionTag({ n, label, dark }: { n: string; label: string; dark: boolean }) {
+  return (
+    <div className="flex items-center gap-3 mb-6">
+      <span className="font-mono text-xs font-bold text-lime">({n})</span>
+      <span className={`font-mono text-xs font-bold tracking-[0.2em] uppercase ${dark ? 'text-white/50' : 'text-ink/50'}`}>{label}</span>
+      <span className={`flex-1 h-px ${dark ? 'bg-white/15' : 'bg-ink/15'}`} />
+    </div>
+  )
+}
+
+// ─── Navbar ─────────────────────────────────────────────────────────────────
 function Navbar({ dark, toggleDark }: { dark: boolean; toggleDark: () => void }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', onScroll)
@@ -352,88 +170,43 @@ function Navbar({ dark, toggleDark }: { dark: boolean; toggleDark: () => void })
   }, [])
 
   const nav = [
-    { label: 'About', href: '#about' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Certs', href: '#certifications' },
-    { label: 'Org', href: '#organizations' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Clients', href: '#clients' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'ABOUT', href: '#about' }, { label: 'WORK', href: '#experience' },
+    { label: 'CERTS', href: '#certifications' }, { label: 'ORG', href: '#organizations' },
+    { label: 'PROJECTS', href: '#projects' }, { label: 'CLIENTS', href: '#clients' },
   ]
-
-  const borderCol = dark ? 'border-dark-border' : 'border-light-border'
+  const line = dark ? 'border-white/15' : 'border-ink/15'
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? dark
-            ? `bg-[#0A0A0A]/90 backdrop-blur-md border-b ${borderCol}`
-            : `bg-[#FAFAFA]/90 backdrop-blur-md border-b ${borderCol}`
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#home" className={`text-sm font-bold tracking-widest uppercase ${dark ? 'text-white' : 'text-gray-900'}`}>
-          MRH.
+    <header className={`fixed top-0 inset-x-0 z-50 border-b-2 transition-colors duration-300 ${scrolled ? (dark ? 'bg-[#0A0A0A]/95 backdrop-blur border-white/15' : 'bg-paper/95 backdrop-blur border-ink/20') : `bg-transparent ${line}`}`}>
+      <div className="max-w-7xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
+        <a href="#home" className={`font-display text-xl tracking-tight ${dark ? 'text-white' : 'text-ink'}`}>
+          MRH<span className="text-lime">.</span>
         </a>
-
-        <nav className="hidden md:flex items-center gap-7">
-          {nav.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className={`text-sm font-medium transition-colors ${dark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}
-            >
-              {item.label}
-            </a>
+        <nav className="hidden md:flex items-center gap-6">
+          {nav.map((it) => (
+            <a key={it.label} href={it.href} className={`font-mono text-xs font-medium tracking-wider transition-colors hover:text-lime ${dark ? 'text-white/60' : 'text-ink/60'}`}>{it.label}</a>
           ))}
         </nav>
-
-        <div className="flex items-center gap-3">
-          <button
-            onClick={toggleDark}
-            aria-label="Toggle theme"
-            className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${
-              dark ? 'bg-[#1F1F1F] text-gray-300 hover:bg-white/10 hover:text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-900'
-            }`}
-          >
+        <div className="flex items-center gap-2">
+          <button onClick={toggleDark} aria-label="Toggle theme" className={`w-9 h-9 border-2 flex items-center justify-center transition-colors hover:bg-lime hover:text-ink hover:border-lime ${dark ? 'border-white/25 text-white' : 'border-ink text-ink'}`}>
             {dark ? <Sun size={15} /> : <Moon size={15} />}
           </button>
-          <a
-            href="#contact"
-            className="hidden md:flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-full bg-white text-black hover:scale-105 transition-transform"
-          >
-            Inquiry / Collab <ArrowRight size={13} />
+          <a href="#contact" className="hidden md:flex items-center gap-2 px-4 h-9 bg-lime text-ink font-mono text-xs font-bold uppercase border-2 border-lime hover:bg-transparent hover:text-lime transition-colors">
+            Inquiry <ArrowUpRight size={14} />
           </a>
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className={`md:hidden w-9 h-9 flex items-center justify-center rounded-full ${dark ? 'text-gray-300' : 'text-gray-600'}`}
-          >
-            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          <button onClick={() => setMenuOpen(!menuOpen)} className={`md:hidden w-9 h-9 border-2 flex items-center justify-center ${dark ? 'border-white/25 text-white' : 'border-ink text-ink'}`}>
+            {menuOpen ? <X size={16} /> : <Menu size={16} />}
           </button>
         </div>
       </div>
-
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className={`md:hidden border-t px-6 py-4 flex flex-col gap-4 ${dark ? `bg-[#0A0A0A] ${borderCol}` : `bg-[#FAFAFA] ${borderCol}`}`}
-          >
-            {nav.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className={`text-sm font-medium ${dark ? 'text-gray-300' : 'text-gray-700'}`}
-              >
-                {item.label}
-              </a>
-            ))}
+          <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className={`md:hidden overflow-hidden border-t-2 ${dark ? 'bg-[#0A0A0A] border-white/15' : 'bg-paper border-ink/20'}`}>
+            <div className="px-5 py-4 flex flex-col gap-3">
+              {nav.map((it) => (
+                <a key={it.label} href={it.href} onClick={() => setMenuOpen(false)} className={`font-mono text-sm ${dark ? 'text-white/80' : 'text-ink/80'}`}>{it.label}</a>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -441,254 +214,116 @@ function Navbar({ dark, toggleDark }: { dark: boolean; toggleDark: () => void })
   )
 }
 
-// ─── Component: Hero ──────────────────────────────────────────────────────────
+// ─── Hero ───────────────────────────────────────────────────────────────────
 function Hero({ dark }: { dark: boolean }) {
   return (
-    <section id="home" className={`min-h-screen relative flex flex-col justify-center overflow-hidden ${dark ? 'bg-[#0A0A0A]' : 'bg-[#FAFAFA]'}`}>
-      {/* Grid bg */}
-      <div
-        className="absolute inset-0 opacity-[0.035] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(${dark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.4)'} 1px, transparent 1px), linear-gradient(90deg, ${dark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.4)'} 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
-        }}
-      />
+    <section id="home" className={`relative pt-24 md:pt-28 overflow-hidden ${dark ? 'bg-[#0A0A0A]' : 'bg-paper'}`}>
+      <div className="max-w-7xl mx-auto px-5 md:px-8 pb-8">
+        {/* top meta row */}
+        <div className={`flex items-center justify-between font-mono text-[10px] md:text-xs uppercase tracking-widest mb-8 ${dark ? 'text-white/40' : 'text-ink/50'}`}>
+          <span>Pandeglang · Banten · ID</span>
+          <span className="hidden sm:flex items-center gap-2"><span className="w-2 h-2 bg-lime inline-block animate-pulse" /> Open for work — 2026</span>
+        </div>
 
-      <div className="max-w-6xl mx-auto px-6 pt-28 pb-16 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left */}
+        <div className="grid lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-6 items-end">
+          {/* Left: giant name */}
           <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-8 border ${dark ? 'border-[#1F1F1F] text-gray-400 bg-[#111111]' : 'border-[#E8E8E8] text-gray-500 bg-white'}`}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              Available for Projects
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="mb-8"
-            >
-              {/* Sapaan Hi, I'm berukuran kecil */}
-              <p className={`text-xl md:text-2xl font-medium mb-2 ${dark ? 'text-gray-400' : 'text-gray-600'}`}>
-                Hi, I'm
-              </p>
-
-              {/* Nama Lengkap */}
-              <h1 className={`font-black leading-[1.05] tracking-tighter`}>
-                {/* Baris 1: Muhammad - Kita block biar punya baris sendiri */}
-                <span className="text-4xl md:text-5xl lg:text-7xl bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent block mb-1">
-                  Muhammad
-                </span>
-
-                {/* Baris 2: Rifki (Putih) & Hidayatulloh (Gradient) */}
-                <div className="text-3xl md:text-4xl lg:text-6xl flex flex-wrap items-baseline gap-x-2">
-                  <span className={dark ? 'text-white' : 'text-gray-900'}>
-                    Rifki
-                  </span>
-                  {/* Gunakan whitespace-nowrap biar 'Hidayatulloh' gak kepotong di tengah */}
-                  <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent whitespace-nowrap">
-                    Hidayatulloh
-                  </span>
-                </div>
-              </h1> 
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.35 }}
-              className={`text-base md:text-lg leading-relaxed mb-8 max-w-md ${dark ? 'text-gray-400' : 'text-gray-500'}`}
-            >
-              Mahasiswa Informatika UIN · Wedding Videographer · Cybersecurity &amp; Networking Enthusiast.
-              <br />
-              <span className="text-sm opacity-70">Membangun di persimpangan teknologi dan visual storytelling.</span>
+            <motion.p initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className={`font-mono text-sm mb-3 ${dark ? 'text-white/60' : 'text-ink/60'}`}>
+              // Videographer · Cybersecurity · Web Developer
             </motion.p>
+            <h1 className={`font-display uppercase leading-[0.82] tracking-tight ${dark ? 'text-white' : 'text-ink'}`}>
+              <motion.span initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }} className="block text-[clamp(2.9rem,11vw,9rem)]">Muhammad</motion.span>
+              <motion.span initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.13 }} className="block text-[clamp(2.9rem,11vw,9rem)]">
+                <span className="bg-lime text-ink px-2 md:px-3 box-decoration-clone">Rifki</span>
+              </motion.span>
+              <motion.span initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.21 }} className="block text-[clamp(2.4rem,9vw,7.5rem)] text-stroke">Hidayatulloh</motion.span>
+            </h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.45 }}
-              className={`flex items-center gap-2 text-sm mb-10 ${dark ? 'text-gray-500' : 'text-gray-400'}`}
-            >
-              <MapPin size={13} />
-              Pandeglang, Indonesia · Available Worldwide
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.55 }}
-              className="flex flex-wrap gap-3"
-            >
-              <a href="#projects" className="flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black text-sm font-semibold hover:scale-105 transition-transform shadow-lg shadow-white/10">
-                Lihat Karya <ArrowRight size={15} />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.4 }} className="flex flex-wrap items-center gap-3 mt-8">
+              <a href="#projects" className="group flex items-center gap-2 px-6 h-12 bg-lime text-ink font-mono text-sm font-bold uppercase border-2 border-lime shadow-[6px_6px_0_0_currentColor] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all">
+                Lihat Karya <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </a>
-              <a href="#contact" className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold border transition-all hover:scale-105 ${dark ? 'border-[#1F1F1F] text-gray-300 hover:border-gray-600' : 'border-[#E8E8E8] text-gray-700 hover:border-gray-400'}`}>
+              <a href="#contact" className={`flex items-center gap-2 px-6 h-12 font-mono text-sm font-bold uppercase border-2 transition-colors hover:bg-lime hover:text-ink hover:border-lime ${dark ? 'border-white/30 text-white' : 'border-ink text-ink'}`}>
                 Hubungi Saya
               </a>
-            </motion.div>
-
-            {/* Social row */}
-            <motion.div
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.7 }}
-              className="flex items-center gap-3 mt-8"
-            >
-              {[
-                { icon: <Github size={16} />, href: 'https://github.com/INISIAL-KICEL', label: 'GitHub' },
-                { icon: <Instagram size={16} />, href: 'https://www.instagram.com/inisial_kicel/', label: 'Instagram' },
-                { icon: <Linkedin size={16} />, href: 'https://www.linkedin.com/in/muhammad-rifki-hidayatulloh-7250782bb/', label: 'LinkedIn' },
-              ].map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className={`w-9 h-9 rounded-full flex items-center justify-center border transition-all hover:scale-110 ${dark ? 'border-[#1F1F1F] text-gray-500 hover:text-white hover:border-gray-600' : 'border-[#E8E8E8] text-gray-400 hover:text-gray-900 hover:border-gray-300'}`}
-                >
-                  {s.icon}
-                </a>
-              ))}
+              <div className="flex items-center gap-2 ml-1">
+                {SOCIALS.map((s) => (
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className={`w-12 h-12 border-2 flex items-center justify-center transition-colors hover:bg-lime hover:text-ink hover:border-lime ${dark ? 'border-white/25 text-white' : 'border-ink text-ink'}`}>{s.icon}</a>
+                ))}
+              </div>
             </motion.div>
           </div>
 
-          {/* Right: portrait */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="flex justify-center lg:justify-end"
-          >
-            <div className="relative">
-              <div className="absolute -inset-5 rounded-3xl bg-gradient-to-br from-violet-500/20 via-blue-500/10 to-cyan-500/20 blur-3xl" />
-              <div className={`relative w-72 h-auto md:w-80 rounded-3xl overflow-hidden border shadow-2xl ${dark ? 'border-[#1F1F1F]' : 'border-[#E8E8E8]'}`}>
-                <img
-                  src={fotoGue}
-                  alt="Muhammad Rifki Hidayatulloh"
-                  className="w-full object-cover object-top"
-                  loading="eager"
-                  fetchPriority="high"
-                />
-              </div>
-              <div className={`absolute -bottom-4 -left-4 px-4 py-2.5 rounded-2xl text-xs font-medium border shadow-xl ${dark ? 'bg-[#111111] border-[#1F1F1F] text-gray-300' : 'bg-white border-[#E8E8E8] text-gray-700 shadow-gray-200'}`}>
-                🎬 Videographer · 🔐 Security · 💻 Dev
-              </div>
+          {/* Right: photo framed */}
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.3 }} className="relative w-full max-w-[320px] justify-self-center lg:justify-self-end">
+            <div className={`relative border-2 ${dark ? 'border-white' : 'border-ink'} shadow-brutal-lime-lg`}>
+              <img src={fotoGue} alt="Muhammad Rifki Hidayatulloh" className="w-full object-cover object-top grayscale contrast-[1.05]" loading="eager" />
+              <div className="absolute -top-3 -right-3 rotate-6 bg-lime text-ink font-mono text-[10px] font-bold uppercase px-3 py-1 border-2 border-ink">Est. 2006</div>
+            </div>
+            <div className={`mt-3 flex items-center justify-between font-mono text-[10px] uppercase ${dark ? 'text-white/40' : 'text-ink/50'}`}>
+              <span>[ MRH ]</span><span>IPK 3.75 · UIN</span>
             </div>
           </motion.div>
         </div>
-
-        {/* Scroll cue */}
-        <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.3 }}
-          className="flex justify-center mt-16"
-        >
-          <a href="#about" className={`flex flex-col items-center gap-1.5 text-[11px] tracking-widest uppercase ${dark ? 'text-gray-700' : 'text-gray-400'}`}>
-            Scroll <ChevronDown size={14} className="animate-bounce" />
-          </a>
-        </motion.div>
       </div>
+
+      <Marquee dark={dark} invert items={['Wedding Film', 'Cybersecurity', 'Network Engineering', 'Web Development', 'Photography', 'CTF']} />
     </section>
   )
 }
 
-// ─── Component: About ─────────────────────────────────────────────────────────
+// ─── About ──────────────────────────────────────────────────────────────────
 function About({ dark }: { dark: boolean }) {
   const skills = [
-    { label: 'Wedding Videography', level: 90 },
-    { label: 'Color Grading & Editing', level: 87 },
-    { label: 'Cybersecurity / CTF', level: 68 },
-    { label: 'Networking (Cisco/Mikrotik)', level: 72 },
+    { label: 'Videography & Color', level: 90 },
+    { label: 'Editing / Premiere Pro', level: 87 },
+    { label: 'Networking (Cisco/MTk)', level: 74 },
     { label: 'Web Development', level: 74 },
+    { label: 'Cybersecurity / CTF', level: 68 },
   ]
-
+  const stats = [
+    { v: '30+', l: 'Pernikahan' }, { v: '18+', l: 'Sertifikasi' },
+    { v: '7+', l: 'Organisasi' }, { v: '04', l: 'Penghargaan' },
+  ]
   return (
-    <section id="about" className={`py-28 ${dark ? 'bg-[#0A0A0A]' : 'bg-[#FAFAFA]'}`}>
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.p
-          variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className={`text-[10px] font-bold tracking-[0.25em] uppercase mb-4 ${dark ? 'text-gray-600' : 'text-gray-400'}`}
-        >
-          01 / About
-        </motion.p>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+    <section id="about" className={`py-20 md:py-28 ${dark ? 'bg-[#0A0A0A] text-white' : 'bg-paper text-ink'}`}>
+      <div className="max-w-7xl mx-auto px-5 md:px-8">
+        <SectionTag n="01" label="About" dark={dark} />
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
           <div>
-            <motion.h2
-              variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
-              className={`text-4xl md:text-5xl font-black leading-[1.05] tracking-tight mb-8 ${dark ? 'text-white' : 'text-gray-900'}`}
-            >
-              Teknologi bertemu{' '}
-              <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">visual</span>
-              {' '}& keamanan{' '}
-              <span className="bg-gradient-to-r from-rose-400 to-pink-400 bg-clip-text text-transparent">digital.</span>
+            <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(1.9rem,5vw,3.4rem)] leading-[0.95] tracking-tight mb-8">
+              Teknologi ketemu <span className="text-lime">visual</span> & keamanan digital.
             </motion.h2>
-
-            <motion.p
-              variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}
-              className={`text-sm leading-relaxed mb-5 ${dark ? 'text-gray-400' : 'text-gray-600'}`}
-            >
-              Saya Muhammad Rifki Hidayatulloh, mahasiswa Informatika di UIN yang berbasis di Pandeglang, Banten.
-              Di satu sisi saya merekam momen pernikahan paling berkesan dengan sentuhan sinematik,
-              di sisi lain saya mendalami cybersecurity dan jaringan komputer sebagai fondasi karir teknologi.
+            <motion.p variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} className={`text-base leading-relaxed mb-4 ${dark ? 'text-white/70' : 'text-ink/70'}`}>
+              Saya Muhammad Rifki Hidayatulloh — mahasiswa Informatika UIN di Pandeglang, Banten. Di satu sisi merekam momen pernikahan dengan sentuhan sinematik, di sisi lain mendalami cybersecurity & jaringan komputer.
             </motion.p>
-
-            <motion.p
-              variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={3}
-              className={`text-sm leading-relaxed ${dark ? 'text-gray-400' : 'text-gray-600'}`}
-            >
-              Perpaduan latar belakang yang unik ini memungkinkan saya mendekati setiap masalah dari berbagai
-              sudut: kreativitas seorang filmmaker, presisi seorang developer, dan mindset analitis seorang
-              security researcher.
+            <motion.p variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2} className={`text-base leading-relaxed ${dark ? 'text-white/70' : 'text-ink/70'}`}>
+              Perpaduan ini bikin saya mendekati masalah dari banyak sudut: kreativitas filmmaker, presisi developer, dan mindset analitis security researcher.
             </motion.p>
-
-            <motion.div
-              variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="flex flex-wrap gap-4 mt-10"
-            >
-              {[
-                { value: '30+', label: 'Pernikahan Difilmkan' },
-                { value: '18+', label: 'Sertifikasi' },
-                { value: '7+', label: 'Organisasi' },
-                { value: '4', label: 'Penghargaan' },
-              ].map((s) => (
-                <motion.div
-                  key={s.label}
-                  variants={fadeUp}
-                  className={`flex flex-col px-5 py-4 rounded-2xl border ${dark ? 'border-[#1F1F1F] bg-[#111111]' : 'border-[#E8E8E8] bg-white shadow-sm'}`}
-                >
-                  <span className={`text-2xl font-black ${dark ? 'text-white' : 'text-gray-900'}`}>{s.value}</span>
-                  <span className="text-xs mt-0.5 text-gray-500">{s.label}</span>
+            <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 sm:grid-cols-4 gap-0 mt-10 border-2 border-current">
+              {stats.map((s, i) => (
+                <motion.div key={s.l} variants={reveal} className={`p-4 md:p-5 border-current ${i % 2 === 0 ? 'border-r-2' : ''} ${i < 2 ? 'border-b-2 sm:border-b-0' : ''} ${i === 2 ? 'sm:border-r-2' : ''} ${i > 0 && i !== 2 ? 'sm:border-l-0' : ''}`}>
+                  <div className="font-display text-3xl md:text-4xl">{s.v}</div>
+                  <div className={`font-mono text-[10px] uppercase tracking-wider mt-1 ${dark ? 'text-white/50' : 'text-ink/50'}`}>{s.l}</div>
                 </motion.div>
               ))}
             </motion.div>
           </div>
-
-          {/* Skills */}
           <div>
-            <motion.h3
-              variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className={`text-[10px] font-bold tracking-[0.2em] uppercase mb-8 ${dark ? 'text-gray-600' : 'text-gray-400'}`}
-            >
-              Core Skills
-            </motion.h3>
-            <motion.div
-              variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="space-y-6"
-            >
-              {skills.map((skill) => (
-                <motion.div key={skill.label} variants={fadeUp}>
-                  <div className="flex justify-between mb-2">
-                    <span className={`text-sm font-medium ${dark ? 'text-gray-300' : 'text-gray-700'}`}>{skill.label}</span>
-                    <span className={`text-xs ${dark ? 'text-gray-600' : 'text-gray-400'}`}>{skill.level}%</span>
+            <p className={`font-mono text-xs uppercase tracking-[0.2em] mb-6 ${dark ? 'text-white/50' : 'text-ink/50'}`}>// Core Skills</p>
+            <div className="space-y-5">
+              {skills.map((sk, i) => (
+                <motion.div key={sk.label} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i}>
+                  <div className="flex justify-between items-end mb-2">
+                    <span className="font-mono text-sm font-medium">{sk.label}</span>
+                    <span className="font-display text-lg">{sk.level}<span className="text-lime">%</span></span>
                   </div>
-                  <div className={`h-[3px] rounded-full ${dark ? 'bg-[#1F1F1F]' : 'bg-gray-100'}`}>
-                    <motion.div
-                      className="h-[3px] rounded-full bg-gradient-to-r from-violet-500 to-blue-400"
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-                    />
+                  <div className={`h-3 border-2 border-current`}>
+                    <motion.div className="h-full bg-lime" initial={{ width: 0 }} whileInView={{ width: `${sk.level}%` }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }} />
                   </div>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
@@ -696,53 +331,30 @@ function About({ dark }: { dark: boolean }) {
   )
 }
 
-// ─── Component: Experience ────────────────────────────────────────────────────
+// ─── Experience ─────────────────────────────────────────────────────────────
 function WorkExperience({ dark }: { dark: boolean }) {
   return (
-    <section id="experience" className={`py-28 ${dark ? 'bg-[#111111]' : 'bg-white'}`}>
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <p className={`text-[10px] font-bold tracking-[0.25em] uppercase mb-4 ${dark ? 'text-gray-600' : 'text-gray-400'}`}>
-            02 / Experience
-          </p>
-          <h2 className={`text-4xl md:text-5xl font-black tracking-tight mb-16 ${dark ? 'text-white' : 'text-gray-900'}`}>
-            Pengalaman Kerja.
-          </h2>
-        </motion.div>
-
-        <motion.div
-          variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-5"
-        >
+    <section id="experience" className={`py-20 md:py-28 border-t-2 ${dark ? 'bg-[#0A0A0A] text-white border-white/15' : 'bg-paper text-ink border-ink/15'}`}>
+      <div className="max-w-7xl mx-auto px-5 md:px-8">
+        <SectionTag n="02" label="Experience" dark={dark} />
+        <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.9] tracking-tight mb-12">
+          Pengalaman<span className="text-lime">.</span>
+        </motion.h2>
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-2 gap-5">
           {experiences.map((exp) => (
-            <motion.div
-              key={exp.company}
-              variants={fadeUp}
-              className={`group relative rounded-3xl border p-7 flex flex-col gap-4 overflow-hidden transition-all duration-300 hover:-translate-y-1 ${dark ? 'border-[#1F1F1F] bg-[#0A0A0A] hover:border-gray-700' : 'border-[#E8E8E8] bg-[#FAFAFA] hover:border-gray-300 hover:shadow-lg hover:shadow-gray-100'}`}
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${exp.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl`} />
-              <div className="relative z-10">
-                <div className="flex items-start justify-between mb-3">
-                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-xs ${dark ? 'bg-[#1F1F1F] text-gray-300' : 'bg-gray-100 text-gray-600'}`}>
-                    {exp.icon}
-                  </div>
-                  <div className="text-right">
-                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${dark ? 'bg-[#1F1F1F] text-gray-500' : 'bg-gray-100 text-gray-500'}`}>
-                      {exp.type}
-                    </span>
-                  </div>
-                </div>
-                <h3 className={`text-lg font-bold mb-1 ${dark ? 'text-white' : 'text-gray-900'}`}>{exp.role}</h3>
-                <p className={`text-sm font-medium mb-1 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>{exp.company}</p>
-                <p className={`text-xs mb-4 ${dark ? 'text-gray-600' : 'text-gray-400'}`}>{exp.period}</p>
-                <p className={`text-sm leading-relaxed mb-4 ${dark ? 'text-gray-400' : 'text-gray-600'}`}>{exp.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {exp.tags.map((tag) => (
-                    <span key={tag} className={`text-[10px] px-2.5 py-1 rounded-full font-medium ${dark ? 'bg-[#1F1F1F] text-gray-500' : 'bg-gray-100 text-gray-600'}`}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+            <motion.div key={exp.company} variants={reveal} className={`group border-2 border-current p-6 transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-lime`}>
+              <div className="flex items-start justify-between mb-4">
+                <div className="w-11 h-11 border-2 border-current flex items-center justify-center group-hover:bg-lime group-hover:text-ink group-hover:border-lime transition-colors">{exp.icon}</div>
+                <span className={`font-mono text-[10px] font-bold uppercase px-2 py-1 border ${dark ? 'border-white/30 text-white/60' : 'border-ink/30 text-ink/60'}`}>{exp.type}</span>
+              </div>
+              <div className={`font-mono text-xs mb-1 ${dark ? 'text-white/50' : 'text-ink/50'}`}>{exp.period}</div>
+              <h3 className="font-display uppercase text-xl tracking-tight leading-tight">{exp.role}</h3>
+              <p className="font-mono text-sm text-lime mb-3">{exp.company}</p>
+              <p className={`text-sm leading-relaxed mb-4 ${dark ? 'text-white/65' : 'text-ink/65'}`}>{exp.desc}</p>
+              <div className="flex flex-wrap gap-2">
+                {exp.tags.map((t) => (
+                  <span key={t} className={`font-mono text-[10px] uppercase px-2 py-1 border ${dark ? 'border-white/20 text-white/60' : 'border-ink/20 text-ink/60'}`}>{t}</span>
+                ))}
               </div>
             </motion.div>
           ))}
@@ -752,91 +364,47 @@ function WorkExperience({ dark }: { dark: boolean }) {
   )
 }
 
-// ─── Component: Certifications ────────────────────────────────────────────────
+// ─── Certifications + Awards ─────────────────────────────────────────────────
 function Certifications({ dark }: { dark: boolean }) {
   return (
-    <section id="certifications" className={`py-28 ${dark ? 'bg-[#0A0A0A]' : 'bg-[#FAFAFA]'}`}>
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <p className={`text-[10px] font-bold tracking-[0.25em] uppercase mb-4 ${dark ? 'text-gray-600' : 'text-gray-400'}`}>
-            03 / Licenses &amp; Certifications
-          </p>
-          <h2 className={`text-4xl md:text-5xl font-black tracking-tight mb-16 ${dark ? 'text-white' : 'text-gray-900'}`}>
-            Sertifikasi &amp; Penghargaan.
-          </h2>
-        </motion.div>
+    <section id="certifications" className={`py-20 md:py-28 border-t-2 ${dark ? 'bg-[#0A0A0A] text-white border-white/15' : 'bg-paper text-ink border-ink/15'}`}>
+      <div className="max-w-7xl mx-auto px-5 md:px-8">
+        <SectionTag n="03" label="Licenses & Awards" dark={dark} />
+        <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.9] tracking-tight mb-12">
+          Sertifikasi & Penghargaan<span className="text-lime">.</span>
+        </motion.h2>
 
-        <div className="space-y-12">
+        <div className="space-y-10">
           {certifications.map((group) => (
-            <div key={group.year}>
-              <motion.p
-                variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-                className={`text-xs font-bold tracking-[0.2em] uppercase mb-5 ${dark ? 'text-gray-600' : 'text-gray-400'}`}
-              >
-                {group.year}
-              </motion.p>
-              <motion.div
-                variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-4"
-              >
-                {group.items.map((cert, i) => (
-                  <motion.div
-                    key={`${cert.title}-${i}`}
-                    variants={fadeUp}
-                    className={`group flex items-start gap-4 p-5 rounded-2xl border transition-all duration-200 ${dark ? 'border-[#1F1F1F] bg-[#111111] hover:border-gray-700' : 'border-[#E8E8E8] bg-white hover:border-gray-300 hover:shadow-sm'}`}
-                  >
-                    <div className={`mt-0.5 w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${dark ? 'bg-[#1F1F1F]' : 'bg-gray-100'} ${cert.color}`}>
-                      {cert.icon}
+            <div key={group.year} className="grid md:grid-cols-[100px_1fr] gap-4 md:gap-8">
+              <div className="font-display text-4xl md:text-5xl text-lime leading-none">{group.year}</div>
+              <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid sm:grid-cols-2 gap-3">
+                {group.items.map((c, i) => (
+                  <motion.div key={i} variants={reveal} className={`group flex items-start gap-3 border-2 border-current p-4 transition-all hover:-translate-y-1 hover:shadow-brutal-sm`}>
+                    <Shield size={15} className="text-lime shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-sm font-semibold leading-snug">{c.title}</p>
+                      <p className={`font-mono text-[11px] mt-1 ${dark ? 'text-white/45' : 'text-ink/45'}`}>{c.issuer}</p>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className={`text-sm font-semibold leading-snug mb-1 ${dark ? 'text-white' : 'text-gray-900'}`}>
-                        {cert.title}
-                      </p>
-                      <p className={`text-xs ${dark ? 'text-gray-500' : 'text-gray-500'}`}>
-                        {cert.issuer}
-                      </p>
-                      <p className={`text-[10px] mt-1 ${dark ? 'text-gray-700' : 'text-gray-400'}`}>
-                        {cert.date}
-                      </p>
-                    </div>
-                    <Award size={12} className={`flex-shrink-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity ${dark ? 'text-gray-600' : 'text-gray-400'}`} />
                   </motion.div>
                 ))}
               </motion.div>
             </div>
           ))}
 
-          {/* Penghargaan & Prestasi */}
-          <div>
-            <motion.p
-              variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className={`text-xs font-bold tracking-[0.2em] uppercase mb-5 ${dark ? 'text-amber-500/80' : 'text-amber-600'}`}
-            >
-              Penghargaan &amp; Prestasi
-            </motion.p>
-            <motion.div
-              variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
-            >
-              {awards.map((aw, i) => (
-                <motion.div
-                  key={`${aw.title}-${i}`}
-                  variants={fadeUp}
-                  className={`group flex items-start gap-4 p-5 rounded-2xl border transition-all duration-200 ${dark ? 'border-amber-500/20 bg-amber-500/[0.04] hover:border-amber-500/40' : 'border-amber-200 bg-amber-50/60 hover:border-amber-300 hover:shadow-sm'}`}
-                >
-                  <div className={`mt-0.5 w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${dark ? 'bg-amber-500/10 text-amber-400' : 'bg-amber-100 text-amber-600'}`}>
-                    <Award size={14} />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className={`text-sm font-semibold leading-snug mb-1 ${dark ? 'text-white' : 'text-gray-900'}`}>
-                      {aw.title}
-                    </p>
-                    <p className={`text-xs ${dark ? 'text-gray-500' : 'text-gray-500'}`}>
-                      {aw.issuer}
-                    </p>
-                    <p className={`text-[10px] mt-1 ${dark ? 'text-gray-700' : 'text-gray-400'}`}>
-                      {aw.date}
-                    </p>
+          {/* Awards */}
+          <div className="grid md:grid-cols-[100px_1fr] gap-4 md:gap-8 pt-4">
+            <div className="font-mono text-xs font-bold uppercase tracking-widest text-lime pt-2">★ Prestasi</div>
+            <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid sm:grid-cols-2 gap-3">
+              {awards.map((a, i) => (
+                <motion.div key={i} variants={reveal} className="group flex items-start gap-3 border-2 border-lime bg-lime/10 p-4 transition-all hover:-translate-y-1 hover:shadow-brutal-lime">
+                  <Award size={16} className="text-lime shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <p className="text-sm font-bold leading-snug">{a.title}</p>
+                      <span className="font-display text-sm text-lime">{a.date}</span>
+                    </div>
+                    <p className={`font-mono text-[11px] mt-1 ${dark ? 'text-white/50' : 'text-ink/50'}`}>{a.issuer}</p>
                   </div>
                 </motion.div>
               ))}
@@ -848,52 +416,24 @@ function Certifications({ dark }: { dark: boolean }) {
   )
 }
 
-// ─── Component: Organizations ─────────────────────────────────────────────────
+// ─── Organizations ──────────────────────────────────────────────────────────
 function Organizations({ dark }: { dark: boolean }) {
   return (
-    <section id="organizations" className={`py-28 ${dark ? 'bg-[#111111]' : 'bg-white'}`}>
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <p className={`text-[10px] font-bold tracking-[0.25em] uppercase mb-4 ${dark ? 'text-gray-600' : 'text-gray-400'}`}>
-            04 / Organizational
-          </p>
-          <h2 className={`text-4xl md:text-5xl font-black tracking-tight mb-16 ${dark ? 'text-white' : 'text-gray-900'}`}>
-            Kepemimpinan &amp; Organisasi.
-          </h2>
-        </motion.div>
-
-        <motion.div
-          variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="space-y-0"
-        >
-          {organizations.map((org, i) => (
-            <motion.div
-              key={`${org.org}-${i}`}
-              variants={fadeUp}
-              className={`group flex flex-col md:flex-row md:items-center gap-2 md:gap-12 py-7 border-b transition-all duration-200 ${
-                dark
-                  ? `border-[#1F1F1F] hover:bg-white/[0.02]${i === 0 ? ' border-t' : ''}`
-                  : `border-[#E8E8E8] hover:bg-gray-50${i === 0 ? ' border-t' : ''}`
-              }`}
-            >
-              <div className="flex items-center gap-3 md:min-w-[200px]">
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${dark ? 'bg-[#1F1F1F] text-gray-500' : 'bg-gray-100 text-gray-500'}`}>
-                  <Users size={13} />
-                </div>
-                <span className={`text-xs ${dark ? 'text-gray-600' : 'text-gray-400'}`}>{org.period}</span>
+    <section id="organizations" className={`py-20 md:py-28 border-t-2 ${dark ? 'bg-[#0A0A0A] text-white border-white/15' : 'bg-paper text-ink border-ink/15'}`}>
+      <div className="max-w-7xl mx-auto px-5 md:px-8">
+        <SectionTag n="04" label="Leadership" dark={dark} />
+        <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.9] tracking-tight mb-12">
+          Organisasi<span className="text-lime">.</span>
+        </motion.h2>
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="border-t-2 border-current">
+          {organizations.map((o, i) => (
+            <motion.div key={i} variants={reveal} className={`group grid grid-cols-1 md:grid-cols-[140px_1fr_auto] md:items-center gap-1 md:gap-6 py-5 border-b-2 border-current transition-colors ${dark ? 'hover:bg-white/[0.03]' : 'hover:bg-ink/[0.03]'}`}>
+              <span className={`font-mono text-xs ${dark ? 'text-white/50' : 'text-ink/50'}`}>{o.period}</span>
+              <div className="flex items-center gap-3">
+                <h3 className="font-display uppercase text-lg md:text-xl tracking-tight leading-none group-hover:text-lime transition-colors">{o.role}</h3>
+                {o.current && <span className="font-mono text-[9px] font-bold uppercase px-2 py-0.5 bg-lime text-ink">Aktif</span>}
               </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <h3 className={`text-base font-bold ${dark ? 'text-white' : 'text-gray-900'}`}>{org.role}</h3>
-                  {org.current && (
-                    <span className="inline-flex items-center gap-1 text-[9px] font-semibold px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">
-                      <span className="w-1 h-1 rounded-full bg-green-400 animate-pulse" />
-                      Aktif
-                    </span>
-                  )}
-                </div>
-                <p className={`text-sm ${dark ? 'text-gray-500' : 'text-gray-600'}`}>{org.org}</p>
-              </div>
+              <p className={`font-mono text-xs md:text-right ${dark ? 'text-white/55' : 'text-ink/55'}`}>{o.org}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -902,55 +442,29 @@ function Organizations({ dark }: { dark: boolean }) {
   )
 }
 
-// ─── Component: Projects ──────────────────────────────────────────────────────
+// ─── Projects ───────────────────────────────────────────────────────────────
 function Projects({ dark }: { dark: boolean }) {
   return (
-    <section id="projects" className={`py-28 ${dark ? 'bg-[#0A0A0A]' : 'bg-[#FAFAFA]'}`}>
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <p className={`text-[10px] font-bold tracking-[0.25em] uppercase mb-4 ${dark ? 'text-gray-600' : 'text-gray-400'}`}>
-            05 / Projects
-          </p>
-          <h2 className={`text-4xl md:text-5xl font-black tracking-tight mb-4 ${dark ? 'text-white' : 'text-gray-900'}`}>
-            Karya Saya.
-          </h2>
-          <p className={`text-sm mb-16 max-w-lg ${dark ? 'text-gray-500' : 'text-gray-500'}`}>
-            Koleksi proyek meliputi sinematografi pernikahan, keamanan digital, jaringan komputer, dan pengembangan web.
-          </p>
-        </motion.div>
-
-        <motion.div
-          variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-5"
-        >
-          {projects.map((project) => (
-            <motion.div
-              key={project.id}
-              variants={fadeUp}
-              className={`group relative rounded-3xl border p-7 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${dark ? 'border-[#1F1F1F] bg-[#111111] hover:border-gray-700 hover:shadow-black/50' : 'border-[#E8E8E8] bg-white hover:border-gray-300 hover:shadow-gray-200/80'}`}
-            >
-              <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${project.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-              <div className="relative z-10">
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`w-10 h-10 rounded-2xl flex items-center justify-center ${dark ? 'bg-[#1F1F1F] text-gray-300' : 'bg-gray-100 text-gray-600'}`}>
-                    {project.icon}
-                  </div>
-                  <span className={`text-[9px] font-bold tracking-[0.2em] uppercase ${dark ? 'text-gray-600' : 'text-gray-400'}`}>
-                    {project.category}
-                  </span>
-                </div>
-                <h3 className={`text-xl font-bold mb-3 leading-tight ${dark ? 'text-white' : 'text-gray-900'}`}>{project.title}</h3>
-                <p className={`text-sm leading-relaxed mb-5 ${dark ? 'text-gray-400' : 'text-gray-600'}`}>{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className={`text-[10px] px-2.5 py-1 rounded-full font-medium ${dark ? 'bg-[#1F1F1F] text-gray-500' : 'bg-gray-100 text-gray-600'}`}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className={`flex items-center gap-1.5 text-xs font-semibold transition-colors ${dark ? 'text-gray-700 group-hover:text-gray-300' : 'text-gray-400 group-hover:text-gray-700'}`}>
-                  Lihat Detail <ExternalLink size={11} />
-                </div>
+    <section id="projects" className={`py-20 md:py-28 border-t-2 ${dark ? 'bg-[#0A0A0A] text-white border-white/15' : 'bg-paper text-ink border-ink/15'}`}>
+      <div className="max-w-7xl mx-auto px-5 md:px-8">
+        <SectionTag n="05" label="Selected Work" dark={dark} />
+        <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.9] tracking-tight mb-12">
+          Karya Saya<span className="text-lime">.</span>
+        </motion.h2>
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-2 gap-5">
+          {projects.map((p) => (
+            <motion.div key={p.id} variants={reveal} className="group border-2 border-current p-6 md:p-8 transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-lime-lg">
+              <div className="flex items-start justify-between mb-6">
+                <span className="font-display text-5xl md:text-6xl text-lime leading-none">{p.id}</span>
+                <div className="w-11 h-11 border-2 border-current flex items-center justify-center group-hover:bg-lime group-hover:text-ink group-hover:border-lime transition-colors">{p.icon}</div>
+              </div>
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-lime mb-2">{p.category}</p>
+              <h3 className="font-display uppercase text-2xl tracking-tight leading-tight mb-3">{p.title}</h3>
+              <p className={`text-sm leading-relaxed mb-5 ${dark ? 'text-white/65' : 'text-ink/65'}`}>{p.description}</p>
+              <div className="flex flex-wrap gap-2">
+                {p.tags.map((t) => (
+                  <span key={t} className={`font-mono text-[10px] uppercase px-2 py-1 border ${dark ? 'border-white/20 text-white/60' : 'border-ink/20 text-ink/60'}`}>{t}</span>
+                ))}
               </div>
             </motion.div>
           ))}
@@ -960,44 +474,24 @@ function Projects({ dark }: { dark: boolean }) {
   )
 }
 
-// ─── Component: Clients & Collaborations ──────────────────────────────────────
+// ─── Clients ────────────────────────────────────────────────────────────────
 function Clients({ dark }: { dark: boolean }) {
   return (
-    <section id="clients" className={`py-28 ${dark ? 'bg-[#0A0A0A]' : 'bg-[#FAFAFA]'}`}>
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <p className={`text-[10px] font-bold tracking-[0.25em] uppercase mb-4 ${dark ? 'text-gray-600' : 'text-gray-400'}`}>
-            06 / Clients &amp; Collaborations
-          </p>
-          <h2 className={`text-4xl md:text-5xl font-black tracking-tight mb-4 ${dark ? 'text-white' : 'text-gray-900'}`}>
-            Klien &amp; Kolaborasi.
-          </h2>
-          <p className={`text-sm mb-16 max-w-lg ${dark ? 'text-gray-500' : 'text-gray-500'}`}>
-            Brand, institusi, dan komunitas yang pernah mempercayakan proyek videografi, pengembangan web, jaringan, dan multimedia.
-          </p>
-        </motion.div>
-
-        <motion.div
-          variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4"
-        >
+    <section id="clients" className={`py-20 md:py-28 border-t-2 ${dark ? 'bg-[#0A0A0A] text-white border-white/15' : 'bg-paper text-ink border-ink/15'}`}>
+      <div className="max-w-7xl mx-auto px-5 md:px-8">
+        <SectionTag n="06" label="Clients & Collab" dark={dark} />
+        <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.9] tracking-tight mb-12">
+          Klien & Kolaborasi<span className="text-lime">.</span>
+        </motion.h2>
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-0 border-t-2 border-l-2 border-current">
           {clients.map((c) => (
-            <motion.div
-              key={c.name}
-              variants={fadeUp}
-              className={`group relative rounded-2xl border p-5 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:-translate-y-1 ${dark ? 'border-[#1F1F1F] bg-[#111111] hover:border-gray-700' : 'border-[#E8E8E8] bg-white hover:border-gray-300 hover:shadow-lg hover:shadow-gray-100'}`}
-            >
-              <div className="h-16 w-full rounded-xl bg-white flex items-center justify-center px-3">
-                <img
-                  src={c.logo}
-                  alt={c.name}
-                  className="max-h-11 max-w-full object-contain grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
-                  loading="lazy"
-                />
+            <motion.div key={c.name} variants={reveal} className="group border-r-2 border-b-2 border-current p-4 flex flex-col items-center justify-center gap-3 transition-colors hover:bg-lime">
+              <div className="h-14 w-full bg-white border-2 border-ink flex items-center justify-center px-3">
+                <img src={c.logo} alt={c.name} className="max-h-9 max-w-full object-contain grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all" loading="lazy" />
               </div>
               <div className="text-center">
-                <p className={`text-[11px] font-semibold leading-tight ${dark ? 'text-gray-300' : 'text-gray-800'}`}>{c.name}</p>
-                <p className={`text-[9px] mt-0.5 tracking-wide uppercase ${dark ? 'text-gray-600' : 'text-gray-400'}`}>{c.tag}</p>
+                <p className="font-mono text-[11px] font-bold leading-tight group-hover:text-ink">{c.name}</p>
+                <p className={`font-mono text-[9px] uppercase mt-0.5 group-hover:text-ink/70 ${dark ? 'text-white/45' : 'text-ink/45'}`}>{c.tag}</p>
               </div>
             </motion.div>
           ))}
@@ -1007,105 +501,51 @@ function Clients({ dark }: { dark: boolean }) {
   )
 }
 
-// ─── Component: Footer / Contact ──────────────────────────────────────────────
+// ─── Contact / Footer ────────────────────────────────────────────────────────
 function Footer({ dark }: { dark: boolean }) {
-  const socials = [
-    { icon: <Github size={17} />, label: 'GitHub', href: 'https://github.com/INISIAL-KICEL' },
-    { icon: <Instagram size={17} />, label: 'Instagram', href: 'https://www.instagram.com/inisial_kicel/' },
-    { icon: <Linkedin size={17} />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/muhammad-rifki-hidayatulloh-7250782bb/' },
-  ]
-
   return (
-    <footer id="contact" className={dark ? 'bg-[#111111]' : 'bg-gray-900'}>
-      <div className="max-w-6xl mx-auto px-6 pt-24 pb-16">
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <p className="text-[10px] font-bold tracking-[0.25em] uppercase mb-6 text-gray-500">07 / Contact</p>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight text-white mb-6 leading-tight">
-            Mari Berkolaborasi<br />
-            <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">Bersama.</span>
-          </h2>
-          <p className="text-gray-400 text-sm md:text-base mb-10 max-w-md leading-relaxed">
-            Terbuka untuk proyek videografi pernikahan, kolaborasi pengembangan web, diskusi keamanan siber, dan peluang kerja lainnya.
-          </p>
-        </motion.div>
+    <footer id="contact" className="bg-lime text-ink">
+      <Marquee dark={dark} invert reverse items={["Let's Build Something", 'Collab', 'Wedding Film', 'Web Dev', 'Security']} />
+      <div className="max-w-7xl mx-auto px-5 md:px-8 pt-16 md:pt-24 pb-10">
+        <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] mb-6">(07) — Contact</p>
+        <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display uppercase text-[clamp(2.6rem,10vw,8rem)] leading-[0.85] tracking-tight mb-10">
+          Mari<br />Berkolaborasi.
+        </motion.h2>
 
-        <motion.div
-          variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="flex flex-wrap gap-4 mb-10"
-        >
-          {[
-            { icon: <MapPin size={14} />, label: 'Pandeglang, Indonesia', href: '#' },
-            { icon: <Phone size={14} />, label: 'WhatsApp: +62 895-3460-38858', href: 'https://wa.me/62895346038858' },
-            { icon: <Linkedin size={14} />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/muhammad-rifki-hidayatulloh-7250782bb/' },
-          ].map((c) => (
-            <motion.a
-              key={c.label}
-              variants={fadeUp}
-              href={c.href}
-              target={c.href !== '#' ? '_blank' : undefined}
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
-            >
-              {c.icon} {c.label}
-            </motion.a>
-          ))}
-        </motion.div>
-
-        <motion.div
-          variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="flex flex-wrap gap-4 mb-16"
-        >
-          <a
-            href="https://wa.me/62895346038858"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black text-sm font-semibold hover:scale-105 transition-transform"
-          >
-            Let's Work Together <ArrowRight size={14} />
+        <div className="grid sm:grid-cols-2 gap-4 mb-12">
+          <a href="https://wa.me/62895346038858" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between border-2 border-ink p-5 bg-ink text-lime hover:bg-transparent hover:text-ink transition-colors">
+            <span className="font-mono text-sm"><Phone size={14} className="inline mr-2" />+62 895-3460-38858</span>
+            <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </a>
-          <div className="flex items-center gap-3">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                className="w-10 h-10 rounded-full flex items-center justify-center border border-white/10 text-gray-400 hover:text-white hover:border-white/30 transition-all hover:scale-110"
-              >
-                {s.icon}
-              </a>
-            ))}
-          </div>
-        </motion.div>
+          <a href="mailto:rifkiorangke2@gmail.com" className="group flex items-center justify-between border-2 border-ink p-5 hover:bg-ink hover:text-lime transition-colors">
+            <span className="font-mono text-sm break-all">rifkiorangke2@gmail.com</span>
+            <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform shrink-0" />
+          </a>
+        </div>
 
-        <div className={`border-t border-white/5 pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4`}>
-          <span className="text-xs text-gray-700">
-            © 2025 Muhammad Rifki Hidayatulloh · Pandeglang, Indonesia.
-          </span>
-          <div className="flex gap-6">
-            {['About', 'Projects', 'Contact'].map((l) => (
-              <a key={l} href={`#${l.toLowerCase()}`} className="text-xs text-gray-700 hover:text-gray-400 transition-colors">
-                {l}
-              </a>
-            ))}
-          </div>
+        <div className="flex flex-wrap items-center gap-3 mb-14">
+          {SOCIALS.map((s) => (
+            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="w-12 h-12 border-2 border-ink flex items-center justify-center hover:bg-ink hover:text-lime transition-colors">{s.icon}</a>
+          ))}
+          <span className="font-mono text-xs ml-1 flex items-center gap-1.5"><MapPin size={13} /> Pandeglang, Indonesia</span>
+        </div>
+
+        <div className="border-t-2 border-ink pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+          <span className="font-display uppercase text-xl">MRH<span className="text-ink">©</span> 2026</span>
+          <span className="font-mono text-[11px] uppercase tracking-wider">Designed & Built with intent — Not by template.</span>
         </div>
       </div>
     </footer>
   )
 }
 
-// ─── Root ─────────────────────────────────────────────────────────────────────
+// ─── Root ────────────────────────────────────────────────────────────────────
 export default function App() {
   const [dark, setDark] = useState(true)
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', dark)
-  }, [dark])
+  useEffect(() => { document.documentElement.classList.toggle('dark', dark) }, [dark])
 
   return (
-    <div>
+    <div className={`grain ${dark ? 'bg-[#0A0A0A]' : 'bg-paper'}`}>
       <Navbar dark={dark} toggleDark={() => setDark(!dark)} />
       <Hero dark={dark} />
       <About dark={dark} />
