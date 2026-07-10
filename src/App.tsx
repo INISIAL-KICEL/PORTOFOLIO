@@ -155,7 +155,7 @@ const clients = [
 
 const SOCIALS = [
   { icon: <Github size={16} />, href: 'https://github.com/INISIAL-KICEL', label: 'GitHub' },
-  { icon: <Instagram size={16} />, href: 'https://www.instagram.com/inisial_kicel/', label: 'Instagram' },
+  { icon: <Instagram size={16} />, href: 'https://www.instagram.com/mhmmdrifkih/', label: 'Instagram' },
   { icon: <Linkedin size={16} />, href: 'https://www.linkedin.com/in/muhammad-rifki-hidayatulloh-7250782bb/', label: 'LinkedIn' },
 ]
 
@@ -542,7 +542,7 @@ function Clients({ dark }: { dark: boolean }) {
               {clients.map((c) => (
                 <div key={c.name} className="mx-3 w-44 shrink-0 flex flex-col items-center gap-2.5">
                   <div className="h-16 w-full rounded-xl bg-white flex items-center justify-center px-5">
-                    <img src={c.logo} alt={c.name} className="max-h-9 max-w-full object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300" loading="lazy" />
+                    <img src={c.logo} alt={c.name} className="max-h-9 max-w-full object-contain transition-transform duration-300 hover:scale-110" loading="lazy" />
                   </div>
                   <span className={`font-mono text-[10px] ${t.faint}`}>{c.name}</span>
                 </div>
