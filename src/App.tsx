@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useScroll, useSpring, useInView } from 'framer
 import {
   Moon, Sun, MapPin, Phone, Github, Instagram,
   Linkedin, ArrowRight, ArrowUpRight, Video, Shield,
-  Code, Menu, X, Award, Users,
+  Code, Menu, X, Award, Users, GraduationCap,
 } from 'lucide-react'
 import fotoGue from './aset/gambar/foto-saya.png'
 import logoNeokasir from './aset/logos/neokasir.png'
@@ -157,6 +157,7 @@ const SOCIALS = [
   { icon: <Github size={16} />, href: 'https://github.com/INISIAL-KICEL', label: 'GitHub' },
   { icon: <Instagram size={16} />, href: 'https://www.instagram.com/mhmmdrifkih/', label: 'Instagram' },
   { icon: <Linkedin size={16} />, href: 'https://www.linkedin.com/in/muhammad-rifki-hidayatulloh-7250782bb/', label: 'LinkedIn' },
+  { icon: <GraduationCap size={16} />, href: 'https://scholar.google.com/citations?hl=id&user=ofLBnP8AAAAJ', label: 'Google Scholar' },
 ]
 
 // ─── Theme helper ─────────────────────────────────────────────────────────────
@@ -460,6 +461,10 @@ function Publications({ dark }: { dark: boolean }) {
             </motion.a>
           ))}
         </motion.div>
+        <motion.a variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} href="https://scholar.google.com/citations?hl=id&user=ofLBnP8AAAAJ" target="_blank" rel="noopener noreferrer" className={`group inline-flex items-center gap-2 mt-8 px-5 h-11 rounded-full text-sm font-medium border transition-all hover:scale-[1.03] active:scale-95 ${t.border} ${t.text} hover:border-lime`}>
+          <GraduationCap size={16} className="text-lime" /> Lihat semua di Google Scholar
+          <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </motion.a>
       </div>
     </section>
   )
