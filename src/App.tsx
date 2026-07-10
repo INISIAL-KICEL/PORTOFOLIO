@@ -224,7 +224,7 @@ function Navbar({ dark, toggleDark }: { dark: boolean; toggleDark: () => void })
   const nav = [
     { label: 'About', href: '#about' }, { label: 'Work', href: '#experience' },
     { label: 'Certs', href: '#certifications' }, { label: 'Papers', href: '#publications' },
-    { label: 'Org', href: '#organizations' }, { label: 'Projects', href: '#projects' }, { label: 'Clients', href: '#clients' },
+    { label: 'Org', href: '#organizations' }, { label: 'Projects', href: '#projects' },
   ]
   return (
     <header className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${scrolled ? `${dark ? 'bg-[#0B0B0B]/80' : 'bg-[#FAF9F6]/80'} backdrop-blur border-b ${t.border}` : 'bg-transparent'}`}>
@@ -529,23 +529,29 @@ function Projects({ dark }: { dark: boolean }) {
 // ─── Clients ────────────────────────────────────────────────────────────────
 function Clients({ dark }: { dark: boolean }) {
   const t = T(dark)
+  const fade = dark ? '#0B0B0B' : '#FAF9F6'
   return (
-    <section id="clients" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
-      <div className="max-w-5xl mx-auto px-5 md:px-8">
-        <SectionHead n="07" label="Clients & Collab" title="Klien & kolaborasi" dark={dark} />
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          {clients.map((c) => (
-            <motion.div key={c.name} variants={reveal} className={`group rounded-xl border p-4 flex flex-col items-center gap-3 transition-colors ${t.border} ${t.hover}`}>
-              <div className="h-12 w-full rounded-lg bg-white flex items-center justify-center px-2.5">
-                <img src={c.logo} alt={c.name} className="max-h-8 max-w-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all" loading="lazy" />
-              </div>
-              <div className="text-center">
-                <p className={`text-[11px] font-medium leading-tight ${t.text}`}>{c.name}</p>
-                <p className={`text-[9px] mt-0.5 ${t.faint}`}>{c.tag}</p>
-              </div>
-            </motion.div>
+    <section id="clients" className={`py-12 md:py-16 border-b ${t.border} ${t.bg} overflow-hidden`}>
+      <div className="max-w-5xl mx-auto px-5 md:px-8 mb-8">
+        <p className={`font-mono text-xs tracking-wide ${t.muted}`}><span className="text-lime">✦</span> Klien &amp; Kolaborasi — dipercaya oleh</p>
+      </div>
+      <div className="group relative">
+        <div className="marquee-track animate-marquee group-hover:[animation-play-state:paused]" style={{ animationDuration: '45s' }}>
+          {[0, 1].map((k) => (
+            <div key={k} className="flex items-center shrink-0" aria-hidden={k === 1}>
+              {clients.map((c) => (
+                <div key={c.name} className="mx-3 w-44 shrink-0 flex flex-col items-center gap-2.5">
+                  <div className="h-16 w-full rounded-xl bg-white flex items-center justify-center px-5">
+                    <img src={c.logo} alt={c.name} className="max-h-9 max-w-full object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300" loading="lazy" />
+                  </div>
+                  <span className={`font-mono text-[10px] ${t.faint}`}>{c.name}</span>
+                </div>
+              ))}
+            </div>
           ))}
-        </motion.div>
+        </div>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-32" style={{ background: `linear-gradient(to right, ${fade}, transparent)` }} />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-32" style={{ background: `linear-gradient(to left, ${fade}, transparent)` }} />
       </div>
     </section>
   )
@@ -557,7 +563,7 @@ function Footer({ dark }: { dark: boolean }) {
   return (
     <footer id="contact" className={`py-24 md:py-32 border-t ${t.border} ${t.bg}`}>
       <div className="max-w-5xl mx-auto px-5 md:px-8">
-        <p className={`font-mono text-xs mb-5 ${t.muted}`}><span className="text-lime">08</span> · Contact</p>
+        <p className={`font-mono text-xs mb-5 ${t.muted}`}><span className="text-lime">07</span> · Contact</p>
         <motion.h2 variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className={`text-4xl md:text-6xl font-semibold tracking-tight mb-8 ${t.text}`}>
           Mari berkolaborasi<span className="text-lime">.</span>
         </motion.h2>
@@ -597,13 +603,13 @@ export default function App() {
       <ScrollProgress />
       <Navbar dark={dark} toggleDark={() => setDark(!dark)} />
       <Hero dark={dark} />
+      <Clients dark={dark} />
       <About dark={dark} />
       <WorkExperience dark={dark} />
       <Certifications dark={dark} />
       <Publications dark={dark} />
       <Organizations dark={dark} />
       <Projects dark={dark} />
-      <Clients dark={dark} />
       <Footer dark={dark} />
     </div>
   )
